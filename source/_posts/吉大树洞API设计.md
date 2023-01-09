@@ -5,7 +5,7 @@ tags:
 - 吉大树洞
 categories:
 - 编程
-cover: cover.jpg
+cover: /img/吉大树洞API设计/cover.jpg
 ---
 ### 发帖系统
 资源：/post
@@ -18,7 +18,12 @@ cover: cover.jpg
 |name| string|
 |src|inner html|
 #### method: PUT
-发帖。参数同上。name是匿名名称。需要在前端进行富文本编辑，存储为innerhtml格式。
+发帖。参数如表所示。
+| key | value |
+|----|----|
+|name| string|
+|src|inner html|
+name是匿名名称。需要在前端进行富文本编辑，存储为innerhtml格式。
 
 #### method: POST
 创建帖子。
@@ -31,7 +36,12 @@ cover: cover.jpg
 ### 首页
 资源：/title
 #### method: GET
-获取一个json对象列表，对象同上。
+获取一个json对象列表。
+| key | value |
+|----|----|
+|title|标题|
+|category|分类|
+|tag|标签|
 
 若加参数为tag=xxx，则检索所有此标签的帖子。同理有category。
 
