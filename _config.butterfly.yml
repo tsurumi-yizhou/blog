@@ -126,14 +126,14 @@ cover:
 
 # Replace Broken Images (替換無法顯示的圖片)
 error_img:
-  flink: /img/friend_404.gif
-  post_page: /img/404.jpg
+  flink: /img/404.jpeg
+  post_page: /img/404.jpeg
 
 # A simple 404 page
 error_404:
   enable: true
   subtitle: '页面走丢了'
-  background: /img/404.jpg
+  background: /img/404.jpeg
 
 post_meta:
   page: # Home Page
