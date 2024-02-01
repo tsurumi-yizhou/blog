@@ -1,13 +1,6 @@
 ---
 title: 不为人知的VSingers
-date: 2023-04-22 19:26
-tags: [VOCALOID, 《Unknown Goose Mother》, wwk, 她还在唱你写的歌, ilem, 青春, 洛天依, 初音未来]
-categories: [回忆录]
-comment: true
-excerpt: false
-cover: /img/乐正绫.jpeg
-
-
+date: 2023-04-22
 ---
 
 其实我早就想写一写 VOCALOID 了。不过长久以来我一直在思考一个问题，vsingers 的歌对于听众，相比于真实的歌手，是否仅仅是演唱者的不同？然而，《G 大调咏叹调》对于我们而言和《千本樱》又有什么区别呢？快意当前，适观而已矣。

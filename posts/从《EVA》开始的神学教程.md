@@ -1,6 +1,6 @@
 ---
 title: 从《EVA》开始的神学教程
-date: 2023-07-19 01:18:25
+date: 2023-07-19
 ---
 
 ## Komm, susser Tod
