@@ -21,11 +21,15 @@ jobs:
       - name: Build
         run: npm install && npm run docs:build
 
-      - name: Deploy
-        uses: zkqiang/tencent-cos-action@v0.1.0
+      - name: Tencent COS and CDN
+        uses: sylingd/tencent-cos-and-cdn-action@latest
         with:
-          args: upload -rs .vitepress/dist/ /
           secret_id: ${{ secrets.SECRET_ID }}
           secret_key: ${{ secrets.SECRET_KEY }}
-          bucket: ${{ secrets.BUCKET }}
-          region: ap-shanghai
+          cos_bucket: ${{ secrets.BUCKET }}
+          cos_region: ap-shanghai
+          cos_accelerate: false
+          cdn_prefix: https://blog.yizhou.ac.cn
+          local_path: .vitepress/dist/
+          remote_path: /
+          clean: false
