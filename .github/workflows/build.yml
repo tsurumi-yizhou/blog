@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - name: Checkout master
-        uses: workflows/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Setup node
-        uses: workflows/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: "10.x"
 
