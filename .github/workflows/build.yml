@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches:
+      master
+
+job:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout master
+        uses: workflows/checkout@v2
+
+      - name: Setup node
+        uses: workflows/setup-node@v1
+        with:
+          node-version: "10.x"
+
+      - name: Build
+        run: npm install && npm run docs:build
+
