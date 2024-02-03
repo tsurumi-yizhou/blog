@@ -22,7 +22,7 @@ jobs:
         run: npm install && npm run docs:build
 
       - name: Tencent COS and CDN
-        uses: sylingd/tencent-cos-and-cdn-action@latest
+        uses: sylingd/tencent-cos-and-cdn-action@v1.0.2
         with:
           secret_id: ${{ secrets.SECRET_ID }}
           secret_key: ${{ secrets.SECRET_KEY }}
