@@ -48,7 +48,7 @@ export default defineConfig({
             id: hostname,
             link: hostname,
             language: 'zh_CN',
-            image: 'https://blog.yizhou.ac.cn/img/avatar.jpg',
+            image: '/img/avatar.jpg',
             favicon: `${hostname}/favicon.ico`,
             copyright:
                 'Copyright (c) 2023-2024, 句芒'

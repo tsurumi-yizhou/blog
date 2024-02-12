@@ -2,7 +2,7 @@
 title: 关于
 ---
 
-![](/img/about.jpg)
+![](https://blog.yizhou.ac.cn/img/about.jpg)
 
 > 博学之，审问之，慎思之，明辨之，笃行之。
 
