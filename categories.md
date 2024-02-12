@@ -23,4 +23,9 @@ features:
 
   - title: 番剧评论
     link: /categories/番剧评论
+    details: 感谢二次元对我审美的启蒙，对人格的矫正，使我没有成为一个NPD
+
+  - title: Modern C++ Tutorial
+    link: /categories/Modern C++ Tutorial
+    details: Modern C++ 是结合编译时函数式运算、概念约束、惰性求值为一体的超级语言
 ---
