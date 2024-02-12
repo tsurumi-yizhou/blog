@@ -21,7 +21,7 @@ jobs:
       - name: Build
         run: npm install && npm run docs:build
 
-      - name: Tencent COS and CDN
+      - name: tencent-cos-cdn
         uses: tsurumi-yizhou/tencent-cos-and-cdn-action@latest
         with:
           secret_id: ${{ secrets.SECRET_ID }}
