@@ -13,6 +13,10 @@ hero:
       link: /rss2.xml
 
 features:
+  - title: 对数据要素和生成式AI的思考
+    link: https://prologue.dev/blog/reflections-on-data-elements-and-generative-ai
+    details: 中国的“数据要素”政策是市场寻租的体现，生成式AI造成了搜索引擎污染以及语言的标准化。
+    
   - title: 红拂夜写论文
     link: /posts/红拂夜写论文
     details: 九年义务教育中哲学的谬误并不只在于高中政治选修，而更大范围地存在于物理化学生物课程。最大的流毒是黑格尔式的独断论，科学的进步总是被描述为翻天覆地的根本变化。
