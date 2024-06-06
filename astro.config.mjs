@@ -1,13 +1,12 @@
 import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
-import remarkToc from 'remark-toc';
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
-
 import vue from "@astrojs/vue";
 
-// https://astro.build/config
 export default defineConfig({
   site: "https://blog.yizhou.ac.cn",
   prefetch: true,
@@ -17,7 +16,12 @@ export default defineConfig({
       langs: [],
       wrap: true
     },
-    remarkPlugins: [remarkToc]
+    remarkPlugins: [
+        remarkMath
+    ],
+    rehypePlugins: [
+        rehypeKatex
+    ]
   },
   integrations: [mdx({}), sitemap({}), tailwind({}), icon(), vue()]
 });

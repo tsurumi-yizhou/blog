@@ -1,0 +1,36 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.2
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - uses: tsurumi-yizhou/tencent-cos-and-cdn-action@latest
+        with:
+          secret_id: ${{ secrets.SECRET_ID }}
+          secret_key: ${{ secrets.SECRET_KEY }}
+          cos_bucket: ${{ secrets.BUCKET }}
+          cos_region: ap-shanghai
+          cos_accelerate: true
+          cdn_prefix: https://blog.yizhou.ac.cn/
+          local_path: dist/
+          remote_path: /
+          clean: true
+
+
+
