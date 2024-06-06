@@ -1,0 +1,20 @@
+---
+import Home from "../layouts/home.astro";
+import Board from "../components/board.vue";
+
+const data = await Astro.glob("./posts/*.md");
+const posts = data.map(post => {
+    return {
+        title: post.frontmatter.title as string,
+        date: new Date(post.frontmatter.pubDate),
+        link: post.url as string,
+        description: post.frontmatter.description as string,
+        category: post.frontmatter.category as string
+    }
+})
+const categories = [...new Set(data.map((post) => post.frontmatter.category).flat())];
+---
+
+<Home title="Categories">
+    <Board client:only="vue" categories={categories} posts={posts} />
+</Home>

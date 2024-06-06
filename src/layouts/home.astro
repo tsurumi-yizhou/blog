@@ -1,0 +1,27 @@
+---
+import { GoogleAnalytics } from "astro-analytics";
+import Bottom from "../components/footer.astro";
+import TopBar from "../components/navbar.astro";
+const { title } = Astro.props;
+---
+
+<html lang="zh_cn">
+    <head>
+        <meta charset="utf-8" />
+        <title>{title}</title>
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+    </head>
+    <body>
+        <header>
+            <TopBar />
+        </header>
+        <div class="flex justify-center my-10 mx-5">
+            <div class="max-w-screen-lg">
+                <slot />
+            </div>
+        </div>
+        <Bottom />
+        <GoogleAnalytics id="G-YPREBP04T3" />
+    </body>
+</html>
