@@ -3,54 +3,66 @@ import Home from "../layouts/home.astro";
 import Post from "../components/post.astro";
 
 const data = await Astro.glob("./posts/*.md");
-const tops = data.filter(post => post.frontmatter.top)
-const posts = data.sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime()).slice(0, 6)
+const tops = data.filter((post) => post.frontmatter.top);
+const posts = data
+    .sort(
+        (a, b) =>
+            new Date(b.frontmatter.pubDate).getTime() -
+            new Date(a.frontmatter.pubDate).getTime(),
+    )
+    .slice(0, 6);
 ---
 
 <Home title="Home">
-	<div class="hero mt-24 mb-16">
-		<div class="hero-content text-center">
-			<div class="max-w-lg">
-				<h1 class="text-5xl font-bold">
-					博學之，審問之，慎思之，明辨之，篤行之。
-				</h1>
-				<div class="py-6 flex justify-around">
-					<a href="https://afdian.net/a/tungichou/plan">
-						<button class="w-24 btn btn-primary">Sponsor</button>
-					</a>
-					<a href="/rss.xml">
-						<button class="w-24 btn btn-secondary">Subscrible</button>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<h1 class="ms-5 mt-10 text-4xl font-mono">Top</h1>
-	<div class="grid grid-cols-1 md:grid-cols-2">
-		{
-			tops.map((post) => (
-				<Post
-					title={post.frontmatter.title}
-					category={post.frontmatter.category}
-					date={new Date(post.frontmatter.pubDate)}
-					description={post.frontmatter.description}
-					link={post.url}
-				/>
-			))
-		}
-	</div>
-	<h1 class="ms-5 mt-10 text-4xl font-mono">Latest</h1>
-	<div class="grid grid-cols-1 md:grid-cols-2">
-		{
-			posts.map((post) => (
-				<Post
-					title={post.frontmatter.title}
-					category={post.frontmatter.category}
-					date={new Date(post.frontmatter.pubDate)}
-					description={post.frontmatter.description}
-					link={post.url}
-				/>
-			))
-		}
-	</div>
+    <div class="mx-auto">
+        <div class="hero mt-24 mb-16">
+            <div class="hero-content text-center">
+                <div class="max-w-lg">
+                    <h1 class="text-5xl font-bold">
+                        博學之，審問之，慎思之，明辨之，篤行之。
+                    </h1>
+                    <div class="py-6 flex justify-around">
+                        <a href="https://afdian.net/a/tungichou/plan">
+                            <button class="w-28 btn btn-secondary"
+                                >Sponsor</button
+                            >
+                        </a>
+                        <a href="/rss.xml">
+                            <button class="w-28 btn btn-primary"
+                                >Subscrible</button
+                            >
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1 class="ms-5 mt-10 text-4xl font-mono">Top</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            {
+                tops.map((post) => (
+                    <Post
+                        title={post.frontmatter.title}
+                        category={post.frontmatter.category}
+                        date={new Date(post.frontmatter.pubDate)}
+                        description={post.frontmatter.description}
+                        link={post.url}
+                    />
+                ))
+            }
+        </div>
+        <h1 class="ms-5 mt-10 text-4xl font-mono">Latest</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2">
+            {
+                posts.map((post) => (
+                    <Post
+                        title={post.frontmatter.title}
+                        category={post.frontmatter.category}
+                        date={new Date(post.frontmatter.pubDate)}
+                        description={post.frontmatter.description}
+                        link={post.url}
+                    />
+                ))
+            }
+        </div>
+    </div>
 </Home>

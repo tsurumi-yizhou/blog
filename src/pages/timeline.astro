@@ -1,8 +1,11 @@
 ---
 import Home from "../layouts/home.astro";
 
-const posts = (await Astro.glob("./posts/*.md"))
-                .sort((a, b) => new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime())
+const posts = (await Astro.glob("./posts/*.md")).sort(
+    (a, b) =>
+        new Date(b.frontmatter.pubDate).getTime() -
+        new Date(a.frontmatter.pubDate).getTime(),
+);
 ---
 
 <Home title="Timeline">
@@ -13,7 +16,9 @@ const posts = (await Astro.glob("./posts/*.md"))
                     posts.map((post) => (
                         <li>
                             <div class="timeline-start">
-                                {new Date(post.frontmatter.pubDate).toLocaleDateString("zh-CN")}
+                                {new Date(
+                                    post.frontmatter.pubDate,
+                                ).toLocaleDateString("zh-CN")}
                             </div>
                             <div class="timeline-middle">
                                 <svg
@@ -33,7 +38,9 @@ const posts = (await Astro.glob("./posts/*.md"))
                                 href={post.url}
                                 class="timeline-end timeline-box prose"
                             >
-                                <h4 class="text-xl">{post.frontmatter.title}</h4>
+                                <h4 class="text-xl">
+                                    {post.frontmatter.title}
+                                </h4>
                                 <p>{post.frontmatter.description}</p>
                             </a>
                             <hr />
