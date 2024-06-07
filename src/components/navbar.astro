@@ -2,21 +2,18 @@
 import { Icon } from "astro-icon/components";
 ---
 
-<nav class="navbar shadow-lg">
-    <div class="navbar-start">
-        <a href="/" class="btn btn-ghost text-xl">停云馆</a>
-    </div>
-    <div class="navbar-center">
-        <a href="/timeline" class="btn btn-ghost">Timeline</a>
-        <a href="/categories" class="btn btn-ghost">Categories</a>
-        <a href="/friends" class="btn btn-ghost">Friends</a>
-        <a href="/about" class="btn btn-ghost">About</a>
-    </div>
-    <div class="navbar-end">
-        <label class="swap swap-rotate">
-            <input type="checkbox" class="theme-controller" value="dracula" />
-            <Icon class="swap-off" name="mdi:white-balance-sunny" />
-            <Icon class="swap-on" name="mdi:weather-night" />
-        </label>
+<nav class="navbar w-full">
+    <div class="container">
+        <div class="navbar-start">
+            <a href="/" class="btn btn-ghost text-xl">停云馆</a>
+        </div>
+        <div class="navbar-center">
+            <a href="/timeline" class="btn btn-ghost">Timeline</a>
+            <a href="/categories" class="btn btn-ghost">Categories</a>
+            <a href="/friends" class="btn btn-ghost">Friends</a>
+            <a href="/about" class="btn btn-ghost">About</a>
+        </div>
+        <div class="navbar-end">
+        </div>
     </div>
 </nav>

@@ -29,7 +29,7 @@ const current = ref(props.categories[0]);
         </div>
 
         <div class="w-3/4">
-            <div class="grid grid-cols-2">
+            <div class="grid grid-cols-1 md:grid-cols-2">
                 <Post v-for="post in props.posts.filter(post => post.category == current)" :title="post.title"
                     :link="post.link" :description="post.description" :date="post.date" />
             </div>

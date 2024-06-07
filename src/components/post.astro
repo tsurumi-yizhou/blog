@@ -3,10 +3,7 @@ const { title, date, cover, category, description, link } = Astro.props;
 ---
 
 <a href={link}>
-    <div class="card card-compact my-3 mx-5 prose">
-        <figure>
-            {cover && <img alt="cover" src={cover} />}
-        </figure>
+    <div class="card card-compact mb-3 mx-5 prose">
         <div class="card-body">
             <h2 class="card-title">{title}</h2>
             <p class="h-16">{description}</p>

@@ -18,16 +18,18 @@ const { title } = Astro.props;
             crossorigin="anonymous"
         />
     </head>
-    <body>
-        <header>
-            <TopBar />
-        </header>
-        <div class="flex justify-center my-10 mx-5">
-            <div class="flex max-w-screen-lg">
-                <slot />
+    <body class="">
+        <div>
+            <div class="sticky w-full flex backdrop-blur transition-shadow">
+                <TopBar />
             </div>
+            <div class="flex justify-center my-10 mx-5">
+                <div class="flex max-w-screen-lg">
+                    <slot class="mx-auto" />
+                </div>
+            </div>
+            <Bottom />
         </div>
-        <Bottom />
         <GoogleAnalytics id="G-YPREBP04T3" />
     </body>
 </html>

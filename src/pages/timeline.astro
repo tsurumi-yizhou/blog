@@ -9,7 +9,7 @@ const posts = (await Astro.glob("./posts/*.md")).sort(
 ---
 
 <Home title="Timeline">
-    <div class="grid grid-cols-4">
+    <div class="grid grid-cols-3 md:grid-cols-4">
         <div class="col-span-3">
             <ul class="timeline timeline-vertical">
                 {
