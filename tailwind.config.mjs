@@ -10,8 +10,8 @@ export default {
   },
   plugins: [typography, daisyui],
   daisyui: {
-    themes: ["emerald", "retro", "lemonade", "sunset"],
-    darkTheme: "sunset",
+    themes: ["emerald", "winter", "dim"],
+    darkTheme: "dim",
     base: true,
     styled: true,
     utils: true,
