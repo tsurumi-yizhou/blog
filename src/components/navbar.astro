@@ -3,17 +3,44 @@ import { Icon } from "astro-icon/components";
 ---
 
 <nav class="navbar w-full">
-    <div class="container">
-        <div class="navbar-start">
-            <a href="/" class="btn btn-ghost text-xl">停云馆</a>
+    <div class="flex items-center justify-between w-full">
+        <div class="block">
+            <a class="btn btn-ghost" href="/">停云馆</a>
         </div>
-        <div class="navbar-center">
-            <a href="/timeline" class="btn btn-ghost">Timeline</a>
-            <a href="/categories" class="btn btn-ghost">Categories</a>
-            <a href="/friends" class="btn btn-ghost">Friends</a>
-            <a href="/about" class="btn btn-ghost">About</a>
+        <div class="hidden md:flex">
+            <a class="btn btn-ghost" href="/timeline">Timeline</a>
+            <a class="btn btn-ghost" href="/categories">Categories</a>
+            <a class="btn btn-ghost" href="/friends">Friends</a>
+            <a class="btn btn-ghost" href="/about">About</a>
         </div>
-        <div class="navbar-end">
+        <div class="block">
+            <div class="md:hidden dropdown dropdown-end">
+                <div tabindex="0" role="button" class="me-5">
+                    <Icon name="mdi:menu" size={24} />
+                </div>
+                <ul
+                    tabindex="0"
+                    class="dropdown-content menu p-2 shadow bg-base-100 rounded-box"
+                >
+                    <li><a href="/timeline">Timeline</a></li>
+                    <li><a href="/categories">Categories</a></li>
+                    <li><a href="/friends">Friends</a></li>
+                    <li><a href="/about">About</a></li>
+                </ul>
+            </div>
+            <label class="swap swap-rotate">
+                <input type="checkbox" class="theme-controller" value="dim" />
+                <Icon
+                    class="swap-off fill-current"
+                    name="mdi:white-balance-sunny"
+                    size={24}
+                />
+                <Icon
+                    class="swap-on fill-current"
+                    name="mdi:weather-night"
+                    size={24}
+                />
+            </label>
         </div>
     </div>
 </nav>

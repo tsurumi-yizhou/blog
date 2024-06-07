@@ -3,16 +3,22 @@ import Home from "../layouts/home.astro";
 import Board from "../components/board.vue";
 
 const data = await Astro.glob("./posts/*.md");
-const posts = data.map(post => {
+const cut = (text: string) => {
+    if (text.length > 30) return text.slice(0, 30) + "...";
+    return text;
+};
+const posts = data.map((post) => {
     return {
         title: post.frontmatter.title as string,
         date: new Date(post.frontmatter.pubDate),
         link: post.url as string,
-        description: post.frontmatter.description as string,
-        category: post.frontmatter.category as string
-    }
-})
-const categories = [...new Set(data.map((post) => post.frontmatter.category).flat())];
+        description: cut(post.frontmatter.description as string),
+        category: post.frontmatter.category as string,
+    };
+});
+const categories = [
+    ...new Set(data.map((post) => post.frontmatter.category).flat()),
+];
 ---
 
 <Home title="Categories">

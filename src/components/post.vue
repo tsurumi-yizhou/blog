@@ -12,7 +12,7 @@ const props = defineProps<Props>();
     <a :href="link">
         <div class="card card-compact shadow-lg p-5 my-3 mx-5 prose">
             <h2 class="card-title">{{ title }}</h2>
-            <p class="h-16">{{ description }}</p>
+            <p class="">{{ description }}</p>
             <div class="justify-start">
                 <caption>
                     {{

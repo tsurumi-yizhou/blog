@@ -1,5 +1,6 @@
 ---
 import Home from "../layouts/home.astro";
+import Post from "../layouts/post.astro";
 
 const posts = (await Astro.glob("./posts/*.md")).sort(
     (a, b) =>
@@ -41,7 +42,14 @@ const posts = (await Astro.glob("./posts/*.md")).sort(
                                 <h4 class="text-xl">
                                     {post.frontmatter.title}
                                 </h4>
-                                <p>{post.frontmatter.description}</p>
+                                <p class="">
+                                    {post.frontmatter.description.length > 30
+                                        ? post.frontmatter.description.slice(
+                                              0,
+                                              30,
+                                          ) + "..."
+                                        : post.frontmatter.description}
+                                </p>
                             </a>
                             <hr />
                         </li>
