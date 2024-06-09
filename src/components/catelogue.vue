@@ -19,7 +19,9 @@ function click_handler(name: string) {
     <ul class="hidden md:block menu rounded-box">
         <li class="menu-title">Categories</li>
         <li v-for="category in categories" @click="click_handler(category)">
-            <a :class="{ active: current == category }">{{ category }}</a>
+            <a :class="{ active: current == category }">
+                {{ category }}
+            </a>
         </li>
     </ul>
     <div class="flex flex-wrap md:hidden">

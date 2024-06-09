@@ -4,12 +4,12 @@ const { name, link, avatar, description } = Astro.props;
 
 <div class="mx-2 my-5 w-52 bg-base-100 shadow-xl rounded-box">
     <a href={link}>
-        <figure class="w-52 h-52">
-            <img class="rounded-lg" alt="avatar" src={avatar} />
+        <figure>
+            <img class="rounded-lg w-52 h-52" alt="avatar" src={avatar} />
         </figure>
         <div class="card-body">
             <h2 class="card-title">{name}</h2>
-            <p>{description}</p>
+            <p class="text-sm font-thin">{description}</p>
         </div>
     </a>
 </div>

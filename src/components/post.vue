@@ -14,17 +14,17 @@ const props = defineProps<Post>();
     <div class="p-5 mx-3 mb-3 bg-base-100 shadow-xl rounded-box">
         <a :href="link">
             <h2 class="card-title">{{ title }}</h2>
-            <p class="text-pretty">
+            <p class="text-pretty font-light">
                 {{ cut(description) }}
             </p>
         </a>
         <div class="flex flex-wrap justify-between w-full">
-            <span class="text-sm font-thin">
+            <p class="text-sm font-thin">
                 {{ date.toLocaleDateString("zh-CN") }}
-            </span>
-            <span class="text-sm font-thin">
+            </p>
+            <p class="text-sm font-thin">
                 {{ category }}
-            </span>
+            </p>
         </div>
     </div>
 </template>

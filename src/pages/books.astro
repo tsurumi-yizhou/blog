@@ -1,0 +1,80 @@
+---
+import Home from "../layouts/home.astro";
+import Book from "../components/book.astro";
+import { getCollection } from "astro:content";
+
+const data = await getCollection("books");
+const books = data.map((entry) => {
+    return {
+        title: entry.data.title as string,
+        cover: entry.data.cover as string,
+        author: entry.data.author as string,
+        publisher: entry.data.publisher as string,
+        status: entry.data.status as string,
+        link: `/books/${entry.slug}`,
+    };
+});
+---
+
+<Home title="Books">
+    <div class="flex flex-wrap">
+        <div role="tablist" class="mx-auto tabs tabs-boxed">
+            <a id="legere" role="tab" class="tab tab-active">读过</a>
+            <a id="lectio" role="tab" class="tab">在读</a>
+            <script is:inline>
+                const elements = document.getElementsByClassName("tab");
+                for (const element of elements) {
+                    element.addEventListener("click", () => {
+                        const event = new CustomEvent("select", {
+                            detail: element.id,
+                        });
+                        window.dispatchEvent(event);
+                    });
+                }
+                window.addEventListener("select", (event) => {
+                    for (const element of elements) {
+                        if (element.id == event.detail) {
+                            element.classList.add("tab-active");
+                        } else {
+                            element.classList.remove("tab-active");
+                        }
+                    }
+                });
+            </script>
+        </div>
+        <div
+            id="books"
+            class="mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        >
+            {
+                books.map((book) => (
+                    <div
+                        id={`${book.title}-${book.status}`}
+                        class:list={[{ hidden: book.status == "lectio" }]}
+                    >
+                        <Book
+                            title={book.title}
+                            cover={book.cover}
+                            author={book.author}
+                            publisher={book.publisher}
+                            link={book.link}
+                        />
+                    </div>
+                ))
+            }
+            <script>
+                const elements = document.getElementById("books")?.children!;
+                window.addEventListener("select", (event) => {
+                    const select = (event as CustomEvent).detail;
+                    for (const element of elements) {
+                        if (element.id.endsWith(select)) {
+                            element.classList.remove("hidden");
+                        } else {
+                            element.classList.add("hidden");
+                        }
+                    }
+                });
+            </script>
+        </div>
+    </div>
+</Home>

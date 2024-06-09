@@ -1,0 +1,20 @@
+---
+const { title, cover, author, publisher, link } = Astro.props;
+---
+
+<div class="h-80 my-5 mx-3 bg-base-100 rounded-box shadow-lg">
+    <figure>
+        <img
+            class="object-cover object-top w-96 h-44 rounded-lg"
+            alt="cover"
+            src={cover}
+        />
+    </figure>
+    <div class="card-body">
+        <h2 class="card-title">{title}</h2>
+        <div class="flex flex-wrap justify-between w-full">
+            <p class="text-sm font-thin">{author}</p>
+            <p class="text-sm font-thin">{publisher}</p>
+        </div>
+    </div>
+</div>

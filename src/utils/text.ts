@@ -9,7 +9,6 @@ export function cut(text: string) {
 }
 
 export function count(text: string) {
-  console.log(text);
   var count = 0;
   for (const ch of text) {
     if (ch.match(/[\u4e00-\u9fa5]/)) {

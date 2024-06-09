@@ -23,14 +23,14 @@ const { frontmatter, headings, rawContent } = Astro.props;
     <article class="prose max-w-screen-md">
         <h1>{frontmatter.title}</h1>
         <div class="flex justify-between">
-            <span class="text-sm font-thin">
+            <span class="text-sm font-thin italic">
                 {frontmatter.category}
             </span>
             <span class="text-sm font-thin" id="busuanzi_container_page_pv">
-                本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+                本文总阅读量: <span id="busuanzi_value_page_pv"></span>
             </span>
             <span class="text-sm font-thin">
-                总字数{count(rawContent())}
+                总字数: {count(rawContent())}
             </span>
             <span class="text-sm font-thin">
                 {new Date(frontmatter.pubDate).toLocaleDateString("zh-CN")}

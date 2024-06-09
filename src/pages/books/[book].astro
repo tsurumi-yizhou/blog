@@ -1,0 +1,20 @@
+---
+import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import Home from "../../layouts/home.astro";
+
+export async function getStaticPaths() {
+    const bookEntries = await getCollection("books");
+    return bookEntries.map((entry) => ({
+        params: { book: entry.slug },
+        props: { entry },
+    }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<Home title={entry.data.title}>
+    <Content />
+</Home>
