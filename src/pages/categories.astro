@@ -1,18 +1,15 @@
 ---
 import Home from "../layouts/home.astro";
+import Catelogue from "../components/catelogue.vue";
 import Board from "../components/board.vue";
 
 const data = await Astro.glob("./posts/*.md");
-const cut = (text: string) => {
-    if (text.length > 30) return text.slice(0, 30) + "...";
-    return text;
-};
 const posts = data.map((post) => {
     return {
         title: post.frontmatter.title as string,
         date: new Date(post.frontmatter.pubDate),
         link: post.url as string,
-        description: cut(post.frontmatter.description as string),
+        description: post.frontmatter.description as string,
         category: post.frontmatter.category as string,
     };
 });
@@ -22,5 +19,13 @@ const categories = [
 ---
 
 <Home title="Categories">
-    <Board client:only="vue" categories={categories} posts={posts} />
+    <div class="grid grid-cols-1 md:grid-cols-4">
+        <h1 class="m-10 text-4xl font-mono md:hidden">Categories</h1>
+        <div class="col-span-1">
+            <Catelogue client:only="vue" categories={categories} />
+        </div>
+        <div class="md:col-span-3">
+            <Board client:only="vue" category={categories[0]} posts={posts} />
+        </div>
+    </div>
 </Home>

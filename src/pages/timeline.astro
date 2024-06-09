@@ -1,6 +1,6 @@
 ---
 import Home from "../layouts/home.astro";
-import Post from "../layouts/post.astro";
+import Post from "../components/post.vue";
 
 const posts = (await Astro.glob("./posts/*.md")).sort(
     (a, b) =>
@@ -10,7 +10,24 @@ const posts = (await Astro.glob("./posts/*.md")).sort(
 ---
 
 <Home title="Timeline">
-    <div class="grid grid-cols-3 md:grid-cols-4">
+    <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:hidden"
+    >
+        <h1 class="m-10 text-4xl font-mono">Timeline</h1>
+        {
+            posts.map((post) => (
+                <Post
+                    client:load
+                    title={post.frontmatter.title}
+                    link={post.url}
+                    description={post.frontmatter.description}
+                    category={post.frontmatter.category}
+                    date={new Date(post.frontmatter.pubDate)}
+                />
+            ))
+        }
+    </div>
+    <div class="hidden md:grid grid-cols-3 md:grid-cols-4">
         <div class="col-span-3">
             <ul class="timeline timeline-vertical">
                 {

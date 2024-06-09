@@ -1,25 +1,30 @@
 <script setup lang="ts">
-interface Props {
+import { cut } from "../utils/text";
+export interface Post {
     title: string;
     link: string;
     description: string;
     date: Date;
+    category: string;
 }
-const props = defineProps<Props>();
+const props = defineProps<Post>();
 </script>
 
 <template>
-    <a :href="link">
-        <div class="card card-compact shadow-lg p-5 my-3 mx-5 prose">
+    <div class="p-5 mx-3 mb-3 bg-base-100 shadow-xl rounded-box">
+        <a :href="link">
             <h2 class="card-title">{{ title }}</h2>
-            <p class="">{{ description }}</p>
-            <div class="justify-start">
-                <caption>
-                    {{
-                        date.toLocaleDateString("zh-CN")
-                    }}
-                </caption>
-            </div>
+            <p class="text-pretty">
+                {{ cut(description) }}
+            </p>
+        </a>
+        <div class="flex flex-wrap justify-between w-full">
+            <span class="text-sm font-thin">
+                {{ date.toLocaleDateString("zh-CN") }}
+            </span>
+            <span class="text-sm font-thin">
+                {{ category }}
+            </span>
         </div>
-    </a>
+    </div>
 </template>

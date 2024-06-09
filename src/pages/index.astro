@@ -1,6 +1,6 @@
 ---
 import Home from "../layouts/home.astro";
-import Post from "../components/post.astro";
+import Post from "../components/post.vue";
 
 const data = await Astro.glob("./posts/*.md");
 const tops = data.filter((post) => post.frontmatter.top);
@@ -36,7 +36,7 @@ const posts = data
                 </div>
             </div>
         </div>
-        <h1 class="ms-10 mt-10 text-4xl font-mono">Top</h1>
+        <h1 class="ms-10 mt-10 text-4xl font-mono">Featured</h1>
         <div class="grid grid-cols-1 md:grid-cols-2">
             {
                 tops.map((post) => (

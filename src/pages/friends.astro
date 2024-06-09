@@ -5,7 +5,12 @@ import { friends } from "../data/friends.json";
 ---
 
 <Home title="Friends">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <h1
+            class="m-10 text-4xl font-mono sm:col-span-2 md:col-span-3 lg:col-span-4"
+        >
+            Friends
+        </h1>
         {
             friends.map((friend) => (
                 <Friend
