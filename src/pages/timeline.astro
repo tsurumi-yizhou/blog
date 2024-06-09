@@ -19,7 +19,7 @@ const posts = (await Astro.glob("./posts/*.md")).sort(
                 <Post
                     client:load
                     title={post.frontmatter.title}
-                    link={post.url}
+                    link={post.url as string}
                     description={post.frontmatter.description}
                     category={post.frontmatter.category}
                     date={new Date(post.frontmatter.pubDate)}
