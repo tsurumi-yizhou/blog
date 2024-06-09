@@ -45,7 +45,7 @@ const posts = data
                         category={post.frontmatter.category}
                         date={new Date(post.frontmatter.pubDate)}
                         description={post.frontmatter.description}
-                        link={post.url}
+                        link={post.url as string}
                     />
                 ))
             }
@@ -59,7 +59,7 @@ const posts = data
                         category={post.frontmatter.category}
                         date={new Date(post.frontmatter.pubDate)}
                         description={post.frontmatter.description}
-                        link={post.url}
+                        link={post.url as string}
                     />
                 ))
             }
