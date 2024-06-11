@@ -36,33 +36,39 @@ const posts = data
                 </div>
             </div>
         </div>
-        <h1 class="ms-10 mt-10 text-4xl font-mono">Featured</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2">
-            {
-                tops.map((post) => (
-                    <Post
-                        title={post.frontmatter.title}
-                        category={post.frontmatter.category}
-                        date={new Date(post.frontmatter.pubDate)}
-                        description={post.frontmatter.description}
-                        link={post.url as string}
-                    />
-                ))
-            }
-        </div>
-        <h1 class="ms-10 mt-10 text-4xl font-mono">Latest</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2">
-            {
-                posts.map((post) => (
-                    <Post
-                        title={post.frontmatter.title}
-                        category={post.frontmatter.category}
-                        date={new Date(post.frontmatter.pubDate)}
-                        description={post.frontmatter.description}
-                        link={post.url as string}
-                    />
-                ))
-            }
+        <div class="flex flex-col gap-6 ps-6 pt-6">
+            <div class="prose flex-grow">
+                <h1>Featured</h1>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12">
+                {
+                    tops.map((post) => (
+                        <Post
+                            title={post.frontmatter.title}
+                            category={post.frontmatter.category}
+                            date={new Date(post.frontmatter.pubDate)}
+                            description={post.frontmatter.description}
+                            link={post.url as string}
+                        />
+                    ))
+                }
+            </div>
+            <div class="prose flex-grow">
+                <h1>Latest</h1>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12">
+                {
+                    posts.map((post) => (
+                        <Post
+                            title={post.frontmatter.title}
+                            category={post.frontmatter.category}
+                            date={new Date(post.frontmatter.pubDate)}
+                            description={post.frontmatter.description}
+                            link={post.url as string}
+                        />
+                    ))
+                }
+            </div>
         </div>
     </div>
 </Home>

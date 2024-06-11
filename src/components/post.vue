@@ -11,20 +11,20 @@ const props = defineProps<Post>();
 </script>
 
 <template>
-    <div class="p-5 mx-3 mb-3 bg-base-100 shadow-xl rounded-box">
-        <a :href="link">
+    <a :href="link" class="card card-compact transition-all duration-200 hover:bg-base-200 hover:-translate-y-1">
+        <div class="card-body">
             <h2 class="card-title">{{ title }}</h2>
             <p class="text-pretty font-light">
                 {{ cut(description) }}
             </p>
-        </a>
-        <div class="flex flex-wrap justify-between w-full">
-            <p class="text-sm font-thin">
-                {{ date.toLocaleDateString("zh-CN") }}
-            </p>
-            <p class="text-sm font-thin">
-                {{ category }}
-            </p>
+            <div class="flex flex-wrap justify-between w-full">
+                <p class="text-sm font-thin">
+                    {{ date.toLocaleDateString("zh-CN") }}
+                </p>
+                <p class="text-sm font-thin">
+                    {{ category }}
+                </p>
+            </div>
         </div>
-    </div>
+    </a>
 </template>

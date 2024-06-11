@@ -17,7 +17,7 @@ window.addEventListener("category", (event) => {
 </script>
 
 <template>
-    <div class="grid grid-cols-1 md:grid-cols-2">
+    <div class="grid grid-cols-1 gap-y-6 md:grid-cols-2">
         <PostCard
             client:load
             v-for="post in posts.filter((post) => post.category == category)"

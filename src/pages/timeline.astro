@@ -10,69 +10,9 @@ const posts = (await Astro.glob("./posts/*.md")).sort(
 ---
 
 <Home title="Timeline">
-    <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:hidden"
-    >
-        <h1 class="m-10 text-4xl font-mono">Timeline</h1>
-        {
-            posts.map((post) => (
-                <Post
-                    client:load
-                    title={post.frontmatter.title}
-                    link={post.url as string}
-                    description={post.frontmatter.description}
-                    category={post.frontmatter.category}
-                    date={new Date(post.frontmatter.pubDate)}
-                />
-            ))
-        }
-    </div>
-    <div class="hidden md:grid grid-cols-3 md:grid-cols-4">
-        <div class="col-span-3">
-            <ul class="timeline timeline-vertical">
-                {
-                    posts.map((post) => (
-                        <li>
-                            <div class="timeline-start">
-                                {new Date(
-                                    post.frontmatter.pubDate,
-                                ).toLocaleDateString("zh-CN")}
-                            </div>
-                            <div class="timeline-middle">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20"
-                                    fill="currentColor"
-                                    class="w-5 h-5"
-                                >
-                                    <path
-                                        fill-rule="evenodd"
-                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
-                                        clip-rule="evenodd"
-                                    />
-                                </svg>
-                            </div>
-                            <a
-                                href={post.url}
-                                class="timeline-end timeline-box prose"
-                            >
-                                <h4 class="text-xl">
-                                    {post.frontmatter.title}
-                                </h4>
-                                <p class="">
-                                    {post.frontmatter.description.length > 30
-                                        ? post.frontmatter.description.slice(
-                                              0,
-                                              30,
-                                          ) + "..."
-                                        : post.frontmatter.description}
-                                </p>
-                            </a>
-                            <hr />
-                        </li>
-                    ))
-                }
-            </ul>
+    <div class="flex flex-col gap-6 ps-6 pt-6">
+        <div class="prose flex-grow">
+            <h1>Timeline</h1>
         </div>
     </div>
 </Home>

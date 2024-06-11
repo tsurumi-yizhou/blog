@@ -2,10 +2,12 @@
 const { name, link, avatar, description } = Astro.props;
 ---
 
-<div class="mx-2 my-5 w-52 bg-base-100 shadow-xl rounded-box">
+<div
+    class="card card-compact transition-all duration-200 hover:bg-base-200 hover:-translate-y-1"
+>
     <a href={link}>
         <figure>
-            <img class="rounded-lg w-52 h-52" alt="avatar" src={avatar} />
+            <img class="rounded-lg w-full" alt="avatar" src={avatar} />
         </figure>
         <div class="card-body">
             <h2 class="card-title">{name}</h2>

@@ -2,8 +2,10 @@
 const { title, cover, author, publisher, link } = Astro.props;
 ---
 
-<div class="my-5 mx-3 bg-base-100 rounded-box shadow-lg">
-    <figure>
+<div
+    class="card card-compact transition-all duration-200 hover:bg-base-200 hover:-translate-y-1"
+>
+    <figure class="px-4 pt-4">
         <img
             class="h-36 sm:h-40 md:h-44 object-cover object-top w-full rounded-lg"
             alt="cover"
