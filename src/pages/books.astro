@@ -1,20 +1,10 @@
 ---
 import Home from "../layouts/home.astro";
-import Book from "../components/book.astro";
+import BookCard from "../components/book.astro";
 import { getBooks } from "../utils/notion";
+import type { Book } from "../utils/notion";
 
-interface Book {
-    title: string;
-    cover: string;
-    author: string;
-    publisher: string;
-    status: string;
-    link: string;
-}
-
-var books: Book[] = [];
-const data = await getBooks();
-console.log(data);
+const books: Book[] = []; // await getBooks()
 ---
 
 <Home title="Books">
@@ -29,11 +19,8 @@ console.log(data);
         >
             {
                 books.map((book) => (
-                    <div
-                        id={`${book.title}-${book.status}`}
-                        class:list={[{ hidden: book.status == "lectio" }]}
-                    >
-                        <Book
+                    <div data-status={book.status}>
+                        <BookCard
                             title={book.title}
                             cover={book.cover}
                             author={book.author}
@@ -48,33 +35,31 @@ console.log(data);
 </Home>
 
 <script>
+    import { currentBookTab } from "../utils/state";
+
     const tabs = document.getElementsByClassName("tab");
+    const books = document.getElementById("books")?.children??[]
+
+    for (const book of books) {
+        currentBookTab.subscribe((value) => {
+            if (book.getAttribute("data-status") == value) {
+                book.classList.remove("hidden")
+            } else {
+                book.classList.add("hidden")
+            }
+        })
+    }
+
     for (const tab of tabs) {
         tab.addEventListener("click", () => {
-            const event = new CustomEvent("select", {
-                detail: tab.id,
-            });
-            window.dispatchEvent(event);
+            currentBookTab.set(tab.id)
         });
+        currentBookTab.subscribe((value) => {
+            if (tab.id == value) {
+                tab.classList.add("tab-active")
+            } else {
+                tab.classList.remove("tab-active");
+            }
+        })
     }
-    window.addEventListener("select", (event) => {
-        for (const element of elements) {
-            if (element.id == (event as CustomEvent).detail) {
-                element.classList.add("tab-active");
-            } else {
-                element.classList.remove("tab-active");
-            }
-        }
-    });
-    const elements = document.getElementById("books")?.children!;
-    window.addEventListener("select", (event) => {
-        const select = (event as CustomEvent).detail;
-        for (const element of elements) {
-            if (element.id.endsWith(select)) {
-                element.classList.remove("hidden");
-            } else {
-                element.classList.add("hidden");
-            }
-        }
-    });
 </script>

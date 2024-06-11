@@ -1,7 +1,6 @@
 ---
 import Home from "../layouts/home.astro";
-import Catelogue from "../components/catelogue.vue";
-import Board from "../components/board.vue";
+import Post from "../components/post.astro";
 
 const data = await Astro.glob("./posts/*.md");
 const posts = data.map((post) => {
@@ -20,12 +19,85 @@ const categories = [
 
 <Home title="Categories">
     <div class="grid grid-cols-1 md:grid-cols-4">
-        <h1 class="m-10 text-4xl font-mono md:hidden">Categories</h1>
-        <div class="col-span-1">
-            <Catelogue client:only="vue" categories={categories} />
+        <div id="buttons" class="col-span-1">
+            <div class="flex flex-wrap md:hidden">
+                {
+                    categories.map((category) => (
+                        <a name={category} class="btn mx-3 my-1" id={category}>
+                            {category}
+                        </a>
+                    ))
+                }
+            </div>
+            <ul class="hidden md:block menu rounded-box">
+                <li class="menu-title">Categories</li>
+                {
+                    categories.map((category) => (
+                        <li>
+                            <a name={category} id={category}>{category}</a>
+                        </li>
+                    ))
+                }
+            </ul>
         </div>
-        <div class="md:col-span-3">
-            <Board client:only="vue" category={categories[0]} posts={posts} />
+        <div class="col-span-3 pt-12 md:pt-0">
+            <div
+                id="posts"
+                class="grid gap-y-6 grid-cols-2"
+            >
+                {
+                    posts.map((post) => (
+                        <div class="post" data-category={post.category}>
+                            <Post
+                                title={post.title}
+                                category={post.category}
+                                date={post.date}
+                                description={post.description}
+                                link={post.link}
+                            />
+                        </div>
+                    ))
+                }
+            </div>
         </div>
     </div>
 </Home>
+
+<script>
+    import { currentCategory } from "../utils/state";
+
+    const buttons = document
+        .getElementById("buttons")
+        ?.getElementsByTagName("a");
+    const posts = document
+        .getElementById("posts")
+        ?.getElementsByClassName("post");
+
+    currentCategory.set(buttons?.item(0)?.id!)
+
+    for (const element of buttons ?? []) {
+        element.addEventListener("click", () => {
+            currentCategory.set(element.id);
+        });
+    }
+
+    currentCategory.subscribe((value) => {
+        for (const element of buttons ?? []) {
+            if (element.id == value) {
+                element.classList.add("active");
+            } else {
+                element.classList.remove("active");
+            }
+        }
+    });
+
+    for (const element of posts ?? []) {
+        currentCategory.subscribe((value) => {
+            if (element.getAttribute("data-category") == value) {
+                element.classList.remove("hidden");
+            } else {
+                element.classList.add("hidden");
+            }
+        });
+    }
+</script>

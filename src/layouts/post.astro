@@ -1,6 +1,6 @@
 ---
 import Home from "./home.astro";
-import Toc from "../components/toc.vue";
+import Toc from "../components/toc.astro";
 import { count } from "../utils/text";
 const { frontmatter, headings, rawContent } = Astro.props;
 ---
@@ -12,7 +12,7 @@ const { frontmatter, headings, rawContent } = Astro.props;
                 <div class="relative order-2 flex-grow ps-16 w-full max-w-md">
                     <div class="fixed top-0 pt-32 overflow-x-hidden overflow-y-auto">
                         <div class="flex flex-col pb-24">
-                            <Toc client:only="vue" links={headings} />
+                            <Toc links={headings} />
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,9 @@ const { frontmatter, headings, rawContent } = Astro.props;
                 />
             )
         }
-        <slot />
+        <div id="slot">
+            <slot />
+        </div>
         <div class="mx-auto mt-10 w-full">
             <script
                 async
@@ -65,3 +67,51 @@ const { frontmatter, headings, rawContent } = Astro.props;
         </div>
     </article>
 </Home>
+
+<script>
+    import { currentTitle } from "../utils/state";
+
+    const titles =
+        document.getElementById("slot")?.getElementsByTagName("h2") ?? [];
+
+    console.log(titles)
+
+    const boundaries = Array.from(titles).map((element: HTMLElement) => {
+        return {
+            slug: element.innerText,
+            top: element.offsetTop,
+            bottom: element.offsetHeight + element.offsetTop,
+        };
+    });
+
+    console.log(boundaries)
+    currentTitle.set(boundaries[0].slug)
+
+    window.addEventListener(
+        "scroll",
+        () => {
+            const scrollTop =
+                document.scrollingElement?.scrollTop || document.body.scrollTop;
+
+            for (const boundary of boundaries) {
+                if (boundary.top <= scrollTop && scrollTop <= boundary.bottom) {
+                    currentTitle.set(boundary.slug)
+                    return;
+                }
+            }
+
+            if (scrollTop <= boundaries[0].top) {
+                currentTitle.set(boundaries[0].slug);
+                return;
+            }
+            
+            if (scrollTop >= boundaries[boundaries.length - 1].bottom) {
+                currentTitle.set(boundaries[boundaries.length - 1].slug);
+                return;
+            }
+        },
+        {
+            passive: true,
+        },
+    );
+</script>

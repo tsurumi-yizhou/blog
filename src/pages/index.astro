@@ -1,6 +1,6 @@
 ---
 import Home from "../layouts/home.astro";
-import Post from "../components/post.vue";
+import Post from "../components/post.astro";
 
 const data = await Astro.glob("./posts/*.md");
 const tops = data.filter((post) => post.frontmatter.top);

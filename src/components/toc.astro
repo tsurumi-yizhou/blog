@@ -1,0 +1,48 @@
+---
+interface Link {
+    depth: number;
+    slug: string;
+    text: string;
+}
+
+const { links } = Astro.props;
+---
+
+<ul class="menu">
+    <li>
+        <h2 class="menu-title">On this page</h2>
+        <ul id="toc" class="menu">
+            {
+                links.map((link: Link) => (
+                    <li>
+                        <a href={`#${link.slug}`}>
+                            <h3 class="font-mono">{link.text}</h3>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </li>
+</ul>
+
+<script>
+    import { currentTitle } from "../utils/state";
+    
+    const titles = document.getElementById("toc")?.getElementsByTagName("a")??[];
+
+    for(const element of titles) {
+        element.addEventListener("click", () => {
+            currentTitle.set(element.innerText)
+        })
+    }
+
+    currentTitle.subscribe((title) => {
+        for(const element of titles) {
+            if (element.innerText == title) {
+                element.classList.add("active");
+            } else {
+                element.classList.remove("active");
+            }
+        }
+    })
+</script>
