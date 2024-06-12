@@ -36,7 +36,7 @@ export async function getBooks() {
     }
 
     cursor = database.next_cursor??undefined;
-    has_more = false; //database.has_more;
+    has_more = database.has_more;
   }
 
   return results?.map(result => {
@@ -44,13 +44,23 @@ export async function getBooks() {
     const cover = result.cover?.external.url;
     const author = result.properties?.author?.rich_text[0]?.plain_text;
     const publisher = result.properties?.publisher?.rich_text[0]?.plain_text;
-    const status = result.archived;
+    var status = "none";
+    if (result.properties.Status.status.name === "Done") {
+      status = "legere"
+    } else if (result.properties.Status.status.name === "In progress") {
+      status = "lectio"
+    } else {
+      status = "vis"
+    }
+    if (title === "以利为利：财政关系与地方政府行为") {
+      console.log(result)
+    }
     return {
       title: title,
       cover: cover,
       author: author,
       publisher: publisher,
-      status: status ? "legere" : "lectio",
+      status: status,
       link: `/books/${title}`
     } satisfies Book;
   });

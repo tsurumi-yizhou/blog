@@ -10,6 +10,7 @@ const { title } = Astro.props;
         <title>{title}</title>
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
+        <meta name="referrer" content="no-referrer" />
         <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
         <link
             rel="stylesheet"
@@ -25,7 +26,9 @@ const { title } = Astro.props;
     </head>
     <body>
         <div>
-            <div class="sticky top-0 z-30 flex w-full justify-center backdrop-blur transition-shadow">
+            <div
+                class="sticky top-0 z-30 flex w-full justify-center backdrop-blur transition-shadow"
+            >
                 <TopBar />
             </div>
             <div class="flex justify-center my-10 mx-5">

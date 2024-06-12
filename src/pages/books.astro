@@ -2,32 +2,36 @@
 import Home from "../layouts/home.astro";
 import BookCard from "../components/book.astro";
 import type { Book } from "../utils/notion";
+import { getBooks } from "../utils/notion";
 
-const books: Book[] = []; // await getBooks()
+const books: Book[] | undefined = (await getBooks())?.sort((it) => it.title);
 ---
 
 <Home title="Books">
-    <div class="flex flex-wrap">
-        <div role="tablist" class="mx-auto tabs tabs-boxed">
+    <div class="w-screen flex flex-wrap justify-center">
+        <div role="tablist" class="mb-10 mx-auto tabs tabs-boxed">
             <a id="legere" role="tab" class="tab tab-active">读过</a>
             <a id="lectio" role="tab" class="tab">在读</a>
+            <a id="vis" role="tab" class="tab">想读</a>
         </div>
         <div
             id="books"
-            class="mx-auto grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 md:grid-cols-4"
+            class="mx-auto w-full grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-3 md:grid-cols-4"
         >
             {
-                books.map((book) => (
-                    <div data-status={book.status}>
-                        <BookCard
-                            title={book.title}
-                            cover={book.cover}
-                            author={book.author}
-                            publisher={book.publisher}
-                            link={book.link}
-                        />
-                    </div>
-                ))
+                books
+                    ?.filter((book) => book.cover)
+                    .map((book) => (
+                        <div data-status={book.status}>
+                            <BookCard
+                                title={book.title}
+                                cover={book.cover}
+                                author={book.author}
+                                publisher={book.publisher}
+                                link={book.link}
+                            />
+                        </div>
+                    ))
             }
         </div>
     </div>
@@ -37,28 +41,28 @@ const books: Book[] = []; // await getBooks()
     import { currentBookTab } from "../utils/state";
 
     const tabs = document.getElementsByClassName("tab");
-    const books = document.getElementById("books")?.children??[]
+    const books = document.getElementById("books")?.children ?? [];
 
     for (const book of books) {
         currentBookTab.subscribe((value) => {
             if (book.getAttribute("data-status") == value) {
-                book.classList.remove("hidden")
+                book.classList.remove("hidden");
             } else {
-                book.classList.add("hidden")
+                book.classList.add("hidden");
             }
-        })
+        });
     }
 
     for (const tab of tabs) {
         tab.addEventListener("click", () => {
-            currentBookTab.set(tab.id)
+            currentBookTab.set(tab.id);
         });
         currentBookTab.subscribe((value) => {
             if (tab.id == value) {
-                tab.classList.add("tab-active")
+                tab.classList.add("tab-active");
             } else {
                 tab.classList.remove("tab-active");
             }
-        })
+        });
     }
 </script>
