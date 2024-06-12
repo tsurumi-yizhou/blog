@@ -5,7 +5,9 @@ import { getBooks } from "../../utils/notion";
 
 export const getStaticPaths = async () => {
     const books: Book[] | undefined = await getBooks();
-    return books?.map((book: Book) => {
+    return books
+    ?.filter(book => book.cover)
+    .map((book: Book) => {
         return {
             params: { book: book.title },
         }

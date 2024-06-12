@@ -52,9 +52,6 @@ export async function getBooks() {
     } else {
       status = "vis"
     }
-    if (title === "以利为利：财政关系与地方政府行为") {
-      console.log(result)
-    }
     return {
       title: title,
       cover: cover,
