@@ -6,20 +6,6 @@ interface Link {
 }
 
 const { links } = Astro.props;
-function getIndent(depth: number) {
-    switch (depth) {
-        case 1:
-            return "ml-0";
-        case 2:
-            return "ml-4";
-        case 3:
-            return "ml-8";
-        case 4:
-            return "ml-12";
-        default:
-            return "ml-0";
-    }
-}
 ---
 
 <ul class="menu">

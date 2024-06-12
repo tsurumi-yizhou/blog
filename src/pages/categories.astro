@@ -18,16 +18,12 @@ const categories = [
 ---
 
 <Home title="Categories">
-    <div class="grid grid-cols-1 md:grid-cols-4">
+    <div id="slot" class="grid grid-cols-1 md:grid-cols-4">
         <div class="col-span-1">
             <div id="tabs" class="flex flex-wrap md:hidden">
                 {
                     categories.map((category) => (
-                        <a
-                            name={category}
-                            class="btn mx-3 my-1"
-                            data-category={category}
-                        >
+                        <a class="btn mx-3 my-1" data-category={category}>
                             {category}
                         </a>
                     ))
@@ -38,9 +34,7 @@ const categories = [
                 {
                     categories.map((category) => (
                         <li>
-                            <a name={category} data-category={category}>
-                                {category}
-                            </a>
+                            <a data-category={category}>{category}</a>
                         </li>
                     ))
                 }
@@ -71,25 +65,37 @@ const categories = [
 
     const buttons = document
         .getElementById("buttons")
-        ?.getElementsByTagName("a");
+        ?.getElementsByTagName("a")!;
 
-    const tabs = document.getElementById("tabs")?.getElementsByTagName("a");
-
-    const posts = document
-        .getElementById("posts")
-        ?.children;
-
-    currentCategory.set(buttons?.item(0)?.getAttribute("data-category")!);
-
-    for (const element of tabs ?? []) {
+    for (const element of buttons) {
         element.addEventListener("click", () => {
             currentCategory.set(
-                element.getAttribute("data-category") as string
-            )
-        })
+                element.getAttribute("data-category") as string,
+            );
+        });
     }
 
-    for (const element of buttons ?? []) {
+    window.onload = () => {
+        currentCategory.set(buttons[0].getAttribute("data-category")!);
+    };
+
+    currentCategory.subscribe((value) => {
+        for (const element of buttons) {
+            if (element.getAttribute("data-category") == value) {
+                element.classList.add("active");
+            } else {
+                element.classList.remove("active");
+            }
+        }
+    });
+</script>
+
+<script>
+    import { currentCategory } from "../utils/state";
+
+    const tabs = document.getElementById("tabs")?.getElementsByTagName("a")!;
+
+    for (const element of tabs) {
         element.addEventListener("click", () => {
             currentCategory.set(
                 element.getAttribute("data-category") as string,
@@ -98,23 +104,23 @@ const categories = [
     }
 
     currentCategory.subscribe((value) => {
-        for (const element of tabs ?? []) {
+        for (const element of tabs) {
             if (element.getAttribute("data-category") == value) {
                 element.classList.add("btn-primary");
             } else {
                 element.classList.remove("btn-primary");
             }
         }
-        
-        for (const element of buttons ?? []) {
-            if (element.getAttribute("data-category") == value) {
-                element.classList.add("active");
-            } else {
-                element.classList.remove("active");
-            }
-        }
+    });
+</script>
 
-        for (const element of posts ?? []) {
+<script>
+    import { currentCategory } from "../utils/state";
+
+    const posts = document.getElementById("posts")?.children!;
+
+    currentCategory.subscribe((value) => {
+        for (const element of posts) {
             if (element.getAttribute("data-category") == value) {
                 element.classList.remove("hidden");
             } else {

@@ -20,7 +20,7 @@ const { frontmatter, headings, rawContent } = Astro.props;
         }
     </div>
 
-    <article class="prose max-w-screen-md">
+    <article id="slot" class="prose max-w-screen-md">
         <h1>{frontmatter.title}</h1>
         <div class="flex justify-between">
             <span class="text-sm font-thin italic">
@@ -45,11 +45,10 @@ const { frontmatter, headings, rawContent } = Astro.props;
                 />
             )
         }
-        <div id="slot">
-            <slot />
-        </div>
+        <slot />
         <div class="mx-auto mt-10 w-full">
             <script
+                is:inline
                 async
                 src="https://giscus.app/client.js"
                 data-repo="tsurumi-yizhou/blog"

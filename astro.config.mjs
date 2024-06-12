@@ -5,7 +5,6 @@ import rehypeKatex from "rehype-katex";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
-import vue from "@astrojs/vue";
 
 export default defineConfig({
   site: "https://blog.yizhou.ac.cn",
@@ -23,5 +22,5 @@ export default defineConfig({
         rehypeKatex
     ]
   },
-  integrations: [mdx({}), sitemap({}), tailwind({}), icon(), vue()]
+  integrations: [mdx({}), sitemap({}), tailwind({}), icon()]
 });

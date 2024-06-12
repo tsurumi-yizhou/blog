@@ -1,6 +1,5 @@
 ---
 import Home from "../layouts/home.astro";
-import Post from "../components/post.astro";
 
 const posts = (await Astro.glob("./posts/*.md"))
     .map((post) => {
