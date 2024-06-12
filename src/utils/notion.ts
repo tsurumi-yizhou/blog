@@ -44,14 +44,8 @@ export async function getBooks() {
     const cover = result.cover?.external.url;
     const author = result.properties?.author?.rich_text[0]?.plain_text;
     const publisher = result.properties?.publisher?.rich_text[0]?.plain_text;
-    var status = "none";
-    if (result.properties.Status.status.name === "Done") {
-      status = "legere"
-    } else if (result.properties.Status.status.name === "In progress") {
-      status = "lectio"
-    } else {
-      status = "vis"
-    }
+    const status = result.properties.Status.status.name;
+    
     return {
       title: title,
       cover: cover,

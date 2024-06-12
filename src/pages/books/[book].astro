@@ -1,17 +1,8 @@
 ---
 import Home from "../../layouts/home.astro";
-import type { Book } from "../../utils/notion";
-import { getBooks } from "../../utils/notion";
 
 export const getStaticPaths = async () => {
-    const books: Book[] | undefined = await getBooks();
-    return books
-    ?.filter(book => book.cover)
-    .map((book: Book) => {
-        return {
-            params: { book: book.title },
-        }
-    }) ?? [];
+    return []
 };
 
 const { book } = Astro.params;
