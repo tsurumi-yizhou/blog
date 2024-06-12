@@ -9,6 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      API_SECRET: ${{ secrets.NOTION_API_SECRET }}
+      DATABASE: ${{ secrets.NOTION_BOOK_DATABASE }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -16,9 +20,7 @@ jobs:
         with:
           node-version: 22.2
 
-      - run: npm ci
-
-      - run: npm run build
+      - run: npm ci && npm run build
 
       - uses: tsurumi-yizhou/tencent-cos-and-cdn-action@latest
         with:
