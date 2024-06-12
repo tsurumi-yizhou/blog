@@ -71,21 +71,23 @@ const { frontmatter, headings, rawContent } = Astro.props;
 <script>
     import { currentTitle } from "../utils/state";
 
-    const titles =
-        document.getElementById("slot")?.getElementsByTagName("h2") ?? [];
+    const slot = document.getElementById("slot")!;
+    const headings = [1, 2, 3, 4]
+        .map((level) => Array.from(slot.getElementsByTagName(`h${level}`)))
+        .reduce((a, b) => a.concat(b))
+        .map((element) => {
+            return {
+                slug: (element as HTMLElement).innerText,
+                top: (element as HTMLElement).offsetTop,
+                bottom:
+                    (element as HTMLElement).offsetHeight +
+                    (element as HTMLElement).offsetTop,
+            };
+        });
 
-    console.log(titles)
-
-    const boundaries = Array.from(titles).map((element: HTMLElement) => {
-        return {
-            slug: element.innerText,
-            top: element.offsetTop,
-            bottom: element.offsetHeight + element.offsetTop,
-        };
-    });
-
-    console.log(boundaries)
-    currentTitle.set(boundaries[0].slug)
+    window.onload = () => {
+        currentTitle.set(headings[0].slug);
+    };
 
     window.addEventListener(
         "scroll",
@@ -93,21 +95,11 @@ const { frontmatter, headings, rawContent } = Astro.props;
             const scrollTop =
                 document.scrollingElement?.scrollTop || document.body.scrollTop;
 
-            for (const boundary of boundaries) {
+            for (const boundary of headings) {
                 if (boundary.top <= scrollTop && scrollTop <= boundary.bottom) {
-                    currentTitle.set(boundary.slug)
+                    currentTitle.set(boundary.slug);
                     return;
                 }
-            }
-
-            if (scrollTop <= boundaries[0].top) {
-                currentTitle.set(boundaries[0].slug);
-                return;
-            }
-            
-            if (scrollTop >= boundaries[boundaries.length - 1].bottom) {
-                currentTitle.set(boundaries[boundaries.length - 1].slug);
-                return;
             }
         },
         {

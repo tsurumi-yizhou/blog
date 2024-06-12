@@ -19,35 +19,38 @@ const categories = [
 
 <Home title="Categories">
     <div class="grid grid-cols-1 md:grid-cols-4">
-        <div id="buttons" class="col-span-1">
-            <div class="flex flex-wrap md:hidden">
+        <div class="col-span-1">
+            <div id="tabs" class="flex flex-wrap md:hidden">
                 {
                     categories.map((category) => (
-                        <a name={category} class="btn mx-3 my-1" data-category={category}>
+                        <a
+                            name={category}
+                            class="btn mx-3 my-1"
+                            data-category={category}
+                        >
                             {category}
                         </a>
                     ))
                 }
             </div>
-            <ul class="hidden md:block menu rounded-box">
+            <ul id="buttons" class="hidden md:block menu rounded-box">
                 <li class="menu-title">Categories</li>
                 {
                     categories.map((category) => (
                         <li>
-                            <a name={category} data-category={category}>{category}</a>
+                            <a name={category} data-category={category}>
+                                {category}
+                            </a>
                         </li>
                     ))
                 }
             </ul>
         </div>
         <div class="col-span-3 pt-12 md:pt-0">
-            <div
-                id="posts"
-                class="grid gap-y-6 grid-cols-2"
-            >
+            <div id="posts" class="grid gap-y-6 grid-cols-1 md:grid-cols-2">
                 {
                     posts.map((post) => (
-                        <div class="post" data-category={post.category}>
+                        <div data-category={post.category}>
                             <Post
                                 title={post.title}
                                 category={post.category}
@@ -69,19 +72,40 @@ const categories = [
     const buttons = document
         .getElementById("buttons")
         ?.getElementsByTagName("a");
+
+    const tabs = document.getElementById("tabs")?.getElementsByTagName("a");
+
     const posts = document
         .getElementById("posts")
-        ?.getElementsByClassName("post");
+        ?.children;
 
-    currentCategory.set(buttons?.item(0)?.getAttribute("data-category")!)
+    currentCategory.set(buttons?.item(0)?.getAttribute("data-category")!);
+
+    for (const element of tabs ?? []) {
+        element.addEventListener("click", () => {
+            currentCategory.set(
+                element.getAttribute("data-category") as string
+            )
+        })
+    }
 
     for (const element of buttons ?? []) {
         element.addEventListener("click", () => {
-            currentCategory.set(element.getAttribute("data-category") as string);
+            currentCategory.set(
+                element.getAttribute("data-category") as string,
+            );
         });
     }
 
     currentCategory.subscribe((value) => {
+        for (const element of tabs ?? []) {
+            if (element.getAttribute("data-category") == value) {
+                element.classList.add("btn-primary");
+            } else {
+                element.classList.remove("btn-primary");
+            }
+        }
+        
         for (const element of buttons ?? []) {
             if (element.getAttribute("data-category") == value) {
                 element.classList.add("active");
@@ -89,15 +113,13 @@ const categories = [
                 element.classList.remove("active");
             }
         }
-    });
 
-    for (const element of posts ?? []) {
-        currentCategory.subscribe((value) => {
+        for (const element of posts ?? []) {
             if (element.getAttribute("data-category") == value) {
                 element.classList.remove("hidden");
             } else {
                 element.classList.add("hidden");
             }
-        });
-    }
+        }
+    });
 </script>
