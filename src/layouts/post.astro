@@ -48,24 +48,25 @@ const { frontmatter, headings, rawContent } = Astro.props;
             )
         }
         <slot />
-        <div class="mx-auto mt-10 w-full">
+        <section class="mx-auto mt-10 w-full">
             <script
-                is:inline
-                async
                 src="https://giscus.app/client.js"
                 data-repo="tsurumi-yizhou/blog"
-                data-repoId="R_kgDOIR5z3g"
+                data-repo-id="R_kgDOIR5z3g"
                 data-category="Announcements"
-                data-categoryId="DIC_kwDOIR5z3s4CftST"
+                data-category-id="DIC_kwDOIR5z3s4CftST"
                 data-mapping="title"
-                data-strict="1"
+                data-strict="0"
                 data-reactions-enabled="1"
-                data-emit-metadata="1"
-                data-input-position="top"
+                data-emit-metadata="0"
+                data-input-position="bottom"
                 data-theme="preferred_color_scheme"
                 data-lang="zh-CN"
-                crossorigin="anonymous"></script>
-        </div>
+                data-loading="lazy"
+                crossorigin="anonymous"
+                async
+            ></script>
+        </section>
     </article>
 </Home>
 
