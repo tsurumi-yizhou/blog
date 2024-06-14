@@ -2,6 +2,12 @@
 import { Client } from "@notionhq/client";
 import type { PageObjectResponse } from "@notionhq/client/build/src/api-endpoints";
 
+const status_map = new Map([
+  ["Not started", "未读"],
+  ["In progress", "在读"],
+  ["Done", "读过"]
+])
+
 export interface Book {
   title: string;
   cover: string | undefined;
@@ -44,14 +50,14 @@ export async function getBooks() {
     const cover = result.cover?.external.url;
     const author = result.properties?.author?.rich_text[0]?.plain_text;
     const publisher = result.properties?.publisher?.rich_text[0]?.plain_text;
-    const status = result.properties.Status.status.name;
+    const status = status_map.get(result.properties.Status.status.name);
     
     return {
       title: title,
       cover: cover,
       author: author,
       publisher: publisher,
-      status: status,
+      status: status!,
       link: `/books/${title}`
     } satisfies Book;
   });

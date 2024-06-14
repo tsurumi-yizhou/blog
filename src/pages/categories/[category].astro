@@ -1,0 +1,96 @@
+---
+import Home from "../../layouts/home.astro";
+import Post from "../../components/post.astro";
+import type { GetStaticPaths } from "astro";
+
+interface Post {
+    title: string,
+    date: Date,
+    description: string,
+    category: string,
+    link: string
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    return [
+        ...new Set(
+            (await Astro.glob("../posts/*.md"))
+                .map((post) => post.frontmatter.category)
+                .flat(),
+        ),
+    ].map((category) => {
+        return {
+            params: {
+                category: category
+            },
+        };
+    });
+}
+
+const { category } = Astro.params;
+const posts = (await Astro.glob("../posts/*.md"))
+    .map((post) => {
+        return {
+            title: post.frontmatter.title as string,
+            date: new Date(post.frontmatter.pubDate),
+            link: post.url as string,
+            description: post.frontmatter.description as string,
+            category: post.frontmatter.category as string,
+        } satisfies Post;
+    });
+const categories = [
+    ...new Set(posts.map((post: Post) => post.category).flat()),
+];
+---
+
+<Home title={category}>
+    <div class="grid grid-cols-1 md:grid-cols-4">
+        <div class="col-span-1">
+            <div class="flex flex-wrap md:hidden">
+                {
+                    categories.map((it) => (
+                        <a
+                            href={`/categories/${it}`}
+                            class="btn mx-3 my-1"
+                            class:list={[{ "btn-primary": it == category }]}
+                        >
+                            {it}
+                        </a>
+                    ))
+                }
+            </div>
+            <ul class="hidden md:block menu rounded-box">
+                <li class="menu-title">Categories</li>
+                {
+                    categories.map((it) => (
+                        <li>
+                            <a
+                                href={`/categories/${it}`}
+                                class:list={[{ "active": it == category }]}
+                            >
+                                {it}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+        <div class="col-span-3 pt-12 md:pt-0">
+            <div id="posts" class="grid gap-y-6 grid-cols-1 md:grid-cols-2">
+                {
+                    posts
+                        .filter((it: Post) => it.category == category)
+                        .map((post: Post) => (
+                            <Post
+                                title={post.title}
+                                category={post.category}
+                                date={post.date}
+                                description={post.description}
+                                link={post.link}
+                            />
+                        ))
+                }
+            </div>
+        </div>
+    </div>
+</Home>

@@ -1,12 +1,27 @@
 ---
-import Home from "../../layouts/home.astro";
+import { getCollection } from "astro:content";
+import Post from "../../layouts/post.astro";
 
-export const getStaticPaths = async () => {
-    return []
-};
+export async function getStaticPaths() {
+    const collection = await getCollection("books");
+
+    return collection.map((entry) => {
+        return {
+            params: {
+                book: entry.data.title,
+            },
+            props: { entry },
+        };
+    });
+}
 
 const { book } = Astro.params;
+const { entry } = Astro.props;
+const { Content } = await entry.render();
 ---
 
-<Home title={book}>
-</Home>
+<Post frontmatter={entry.data} headings={[]} rawContent={() => entry.body}>
+    <article class="prose">
+        <Content />
+    </article>
+</Post>
