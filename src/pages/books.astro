@@ -8,7 +8,7 @@ const books: Book[] | undefined = (await getBooks())?.sort((it) => it.title);
 ---
 
 <Home title="Books">
-    <div class="w-screen flex flex-wrap justify-center ps-6 pt-6">
+    <div class="w-screen flex flex-wrap justify-center px-6 pt-6">
         <div role="tablist" class="mb-10 mx-auto tabs tabs-boxed">
             <a id="Done" role="tab" class="tab tab-active">读过</a>
             <a id="In progress" role="tab" class="tab">在读</a>
