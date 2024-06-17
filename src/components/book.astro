@@ -10,45 +10,28 @@ const find = (name: string) => {
 };
 ---
 
-{
-    find(title) ? (
-        <a
-            href={link}
-            class="card card-compact transition-all duration-200 hover:bg-base-200 hover:-translate-y-1"
-        >
-            <figure class="px-4 pt-4">
-                <img
-                    class="h-36 sm:h-40 md:h-44 object-cover object-top w-full rounded-lg"
-                    alt={title}
-                    src={cover}
-                />
-            </figure>
-            <div class="p-3 md:card-body">
-                <h2 class="text-lg md:card-title">{title}</h2>
-                <div class="flex flex-wrap justify-between w-full">
-                    <p class="text-sm font-thin">{author}</p>
-                    <p class="text-sm font-thin">{publisher}</p>
-                </div>
-            </div>
-        </a>
-    ) : (
-        <div
-            class="card card-compact transition-all duration-200 hover:bg-base-200 hover:-translate-y-1"
-        >
-            <figure class="px-4 pt-4">
-                <img
-                    class="h-36 sm:h-40 md:h-44 object-cover object-top w-full rounded-lg"
-                    alt="cover"
-                    src={cover}
-                />
-            </figure>
-            <div class="p-3 md:card-body">
-                <h2 class="text-lg md:card-title">{title}</h2>
-                <div class="flex flex-wrap justify-between w-full">
-                    <p class="text-sm font-thin">{author}</p>
-                    <p class="text-sm font-thin">{publisher}</p>
-                </div>
-            </div>
+<div
+    class="card card-compact transition-all duration-200 hover:bg-base-200 hover:-translate-y-1"
+>
+    <figure class="px-4 pt-4">
+        <img
+            class="h-36 sm:h-40 md:h-44 object-cover object-top w-full rounded-lg"
+            alt={title}
+            src={cover}
+        />
+    </figure>
+    <div class="p-3 md:card-body">
+        <h2 class="text-lg md:card-title">{title}</h2>
+        <div class="flex flex-wrap justify-between w-full">
+            <p class="text-sm font-thin">{author}</p>
+            <p class="text-sm font-thin">{publisher}</p>
         </div>
-    )
-}
+        {
+            find(title) && (
+                <div class="card-actions justify-end">
+                    <a class="btn btn-primary" href={`/books/${title}`}>Read More</a>
+                </div>
+            )
+        }
+    </div>
+</div>
