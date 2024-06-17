@@ -2,110 +2,149 @@
 import Home from "./home.astro";
 import Toc from "../components/toc.astro";
 import { count } from "../utils/text";
+import { Icon } from "astro-icon/components";
 const { frontmatter, headings, rawContent } = Astro.props;
 ---
 
 <Home title={frontmatter.title}>
-    <div class="hidden md:contents">
-        {
-            headings.length != 0 && (
-                <div class="relative order-2 flex-grow ps-16 w-full max-w-md">
-                    <div class="fixed top-0 pt-32 overflow-x-hidden overflow-y-auto">
-                        <div class="flex flex-col pb-24">
-                            <Toc links={headings} />
+    <div class="flex justify-center">
+        <div
+            class="hidden relative order-2 flex-grow ps-32 max-w-32 w-full md:block"
+        >
+            {
+                headings.length != 0 && (
+                    <>
+                        <div class="fixed bottom-0 z-10 w-52 h-32" />
+                        <div class="fixed top-0 pt-48 w-52 h-dvh overflow-x-hidden overflow-y-auto">
+                            <div class="flex flex-col pb-32">
+                                <div class="flex flex-col flex-grow">
+                                    <Toc links={headings} />
+                                    <div class="flex-grow" />
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )
+            }
+        </div>
+
+        <article class="relative order-1 max-w-screen-md w-full">
+            <div class="mx-auto">
+                <div class="h-64 overflow-hidden bg-cover bg-center rounded-md">
+                    <div class="flex items-center h-full bg-opacity-30">
+                        <div class="max-w-xl px-5 md:px-10">
+                            <h2
+                                class="text-3xl font-bold text-white break-normal line-clamp-4 sd: line-clamp-3 md: line-clamp-2"
+                            >
+                                {frontmatter.title}
+                            </h2>
+                            <p
+                                class="inline-block mt-2 mr-5 text-sm md:text-sm text-slate-200"
+                            >
+                                {
+                                    new Date(
+                                        frontmatter.pubDate,
+                                    ).toLocaleDateString("zh-CN")
+                                }
+                            </p>
+                            <p
+                                class="inline-block mt-2 mr-5 text-sm md:text-sm text-slate-200"
+                            >
+                                {count(rawContent())} words
+                            </p>
+                            <p
+                                id="busuanzi_container_page_pv"
+                                class="inline-block mt-2 mr-5 text-sm md:text-sm text-slate-200"
+                            >
+                                <span id="busuanzi_value_page_pv"></span> views
+                            </p>
+                            <p
+                                class="inline-block mt-2 text-sm md:inline-block md:text-sm text-slate-200"
+                            >
+                                {
+                                    frontmatter.category && (
+                                        <a
+                                            href={`/categories/${frontmatter.category}`}
+                                        >
+                                            {frontmatter.category}
+                                        </a>
+                                    )
+                                }
+                            </p>
                         </div>
                     </div>
                 </div>
-            )
-        }
-    </div>
-
-    <article id="slot" class="prose max-w-screen-md">
-        <h1>{frontmatter.title}</h1>
-        <div class="flex justify-between mb-10">
-            <a href={`/categories/${frontmatter.category}`}>
-                <div class="text-sm font-thin italic">
-                    {frontmatter.category}
+                <div id="slot" class="mx-auto prose">
+                    <slot />
                 </div>
-            </a>
-            <div class="text-sm font-thin" id="busuanzi_container_page_pv">
-                本文总阅读量: <span id="busuanzi_value_page_pv"></span>
+                <section class="mx-auto mt-10 w-full">
+                    <script
+                        src="https://giscus.app/client.js"
+                        data-repo="tsurumi-yizhou/blog"
+                        data-repo-id="R_kgDOIR5z3g"
+                        data-category="Announcements"
+                        data-category-id="DIC_kwDOIR5z3s4CftST"
+                        data-mapping="title"
+                        data-strict="0"
+                        data-reactions-enabled="1"
+                        data-emit-metadata="0"
+                        data-input-position="bottom"
+                        data-theme="preferred_color_scheme"
+                        data-lang="zh-CN"
+                        data-loading="lazy"
+                        crossorigin="anonymous"
+                        async></script>
+                </section>
             </div>
-            <div class="text-sm font-thin">
-                总字数: {count(rawContent())}
-            </div>
-            <div class="text-sm font-thin">
-                {new Date(frontmatter.pubDate).toLocaleDateString("zh-CN")}
-            </div>
-        </div>
-        {
-            frontmatter.cover && (
-                <img
-                    alt="cover"
-                    class="rounded-lg shadow-lg mx-auto"
-                    src={frontmatter.cover}
-                />
-            )
-        }
-        <slot />
-        <section class="mx-auto mt-10 w-full">
-            <script
-                src="https://giscus.app/client.js"
-                data-repo="tsurumi-yizhou/blog"
-                data-repo-id="R_kgDOIR5z3g"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOIR5z3s4CftST"
-                data-mapping="title"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="bottom"
-                data-theme="preferred_color_scheme"
-                data-lang="zh-CN"
-                data-loading="lazy"
-                crossorigin="anonymous"
-                async
-            ></script>
-        </section>
-    </article>
-</Home>
+        </article>
 
-<script>
-    import { currentTitle } from "../utils/state";
+        <script>
+            const slot = document.getElementById("slot")!;
+            const headings = [1, 2, 3, 4]
+                .map((level) =>
+                    Array.from(slot.getElementsByTagName(`h${level}`)),
+                )
+                .reduce((a, b) => a.concat(b))
+                .map((element) => {
+                    return {
+                        slug: (element as HTMLElement).innerText,
+                        top: (element as HTMLElement).offsetTop,
+                        bottom:
+                            (element as HTMLElement).offsetHeight +
+                            (element as HTMLElement).offsetTop,
+                    };
+                });
 
-    const slot = document.getElementById("slot")!;
-    const headings = [1, 2, 3, 4]
-        .map((level) => Array.from(slot.getElementsByTagName(`h${level}`)))
-        .reduce((a, b) => a.concat(b))
-        .map((element) => {
-            return {
-                slug: (element as HTMLElement).innerText,
-                top: (element as HTMLElement).offsetTop,
-                bottom:
-                    (element as HTMLElement).offsetHeight +
-                    (element as HTMLElement).offsetTop,
+            window.onload = () => {
+                const event = new CustomEvent("title", {
+                    detail: headings[0].slug,
+                });
+                window.dispatchEvent(event);
             };
-        });
 
-    window.onload = () => {
-        currentTitle.set(headings[0].slug);
-    };
+            window.addEventListener(
+                "scroll",
+                () => {
+                    const scrollTop =
+                        document.scrollingElement?.scrollTop ||
+                        document.body.scrollTop;
 
-    window.addEventListener(
-        "scroll",
-        () => {
-            const scrollTop =
-                document.scrollingElement?.scrollTop || document.body.scrollTop;
-
-            for (const boundary of headings) {
-                if (boundary.top <= scrollTop && scrollTop <= boundary.bottom) {
-                    currentTitle.set(boundary.slug);
-                    return;
-                }
-            }
-        },
-        {
-            passive: true,
-        },
-    );
-</script>
+                    for (const boundary of headings) {
+                        if (
+                            boundary.top <= scrollTop &&
+                            scrollTop <= boundary.bottom
+                        ) {
+                            const event = new CustomEvent("title", {
+                                detail: boundary.slug,
+                            });
+                            window.dispatchEvent(event);
+                        }
+                    }
+                },
+                {
+                    passive: true,
+                },
+            );
+        </script>
+    </div>
+</Home>

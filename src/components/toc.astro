@@ -8,7 +8,7 @@ interface Link {
 const { links } = Astro.props;
 ---
 
-<ul class="menu">
+<ul class="block menu">
     <li>
         <h2 class="menu-title">On this page</h2>
         <ul id="toc" class="menu">
@@ -26,18 +26,18 @@ const { links } = Astro.props;
 </ul>
 
 <script>
-    import { currentTitle } from "../utils/state";
-
     const titles =
         document.getElementById("toc")?.getElementsByTagName("a") ?? [];
 
     for (const element of titles) {
         element.addEventListener("click", () => {
-            currentTitle.set(element.innerText);
+            const event = new CustomEvent("title", { detail: element.innerText})
+            window.dispatchEvent(event)
         });
     }
 
-    currentTitle.subscribe((title) => {
+    window.addEventListener("title", (event) => {
+        const title = (event as CustomEvent).detail
         for (const element of titles) {
             if (element.getAttribute("data-title") == title) {
                 element.classList.add("active");
