@@ -10,13 +10,6 @@ export default {
   },
   plugins: [typography, daisyui],
   daisyui: {
-    themes: ["emerald", "winter", "dim"],
-    darkTheme: "dim",
-    base: true,
-    styled: true,
-    utils: true,
-    prefix: "",
-    logs: true,
-    themeRoot: ":root",
+    themes: ["emerald", "winter", "dim"]
   },
 };
