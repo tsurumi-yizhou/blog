@@ -6,6 +6,7 @@ category: 游记
 layout: ../../layouts/post.astro
 cover: https://static.yizhou.ac.cn/8W8WwS.jpg
 ---
+
 北京环球影城比起大阪来颇显大而无当，同样的娱乐设施增加了用时半小时的排队区，最好玩的是小黄人从三个车变成九个。况且还有独家的马里奥和鬼灭之刃。
 
 ![](https://static.yizhou.ac.cn/3YEsdM.jpg)
