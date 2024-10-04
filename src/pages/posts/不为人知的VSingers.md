@@ -1,7 +1,7 @@
 ---
 title: 不为人知的VSingers
 pubDate: 2023-04-22
-category: 心事浓如酒
+category: 杂谈、反思与批判
 description: 虚拟歌姬本来是没有灵魂的，而我们相处太久了，互相浸润太久了，我把灵魂分给她们一半，她们把歌声分给我一半。
 layout: ../../layouts/post.astro
 ---
