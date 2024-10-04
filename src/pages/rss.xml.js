@@ -5,9 +5,10 @@ export async function GET(context) {
         title: "停云馆",
         description: "博学之，审问之，慎思之，明辨之，笃行之。",
         site: context.site,
-        items: await pagesGlobToRssItems(
-            import.meta.glob('./posts/*.{md,mdx}'),
-        ),
+        items: (await pagesGlobToRssItems(import.meta.glob('./posts/*.{md,mdx}')))
+            .sort((a, b) => {
+                return b.pubDate - a.pubDate
+            }),
         customData: `<language>zh-cn</language>`,
     })
 }
