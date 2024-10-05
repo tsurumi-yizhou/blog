@@ -1,8 +1,8 @@
 ---
 import Home from "./home.astro";
 import Toc from "../components/toc.astro";
-import { count } from "../utils/text";
 import { Icon } from "astro-icon/components";
+
 const { frontmatter, headings, rawContent } = Astro.props;
 ---
 
@@ -61,7 +61,7 @@ const { frontmatter, headings, rawContent } = Astro.props;
                                     class="inline-block"
                                     name="mdi:typewriter"
                                 />
-                                {count(rawContent())}
+                                {frontmatter.characters}
                             </p>
                             <p
                                 id="busuanzi_container_page_pv"
@@ -71,24 +71,30 @@ const { frontmatter, headings, rawContent } = Astro.props;
                                     class="inline-block"
                                     name="mdi:eye-outline"
                                 />
-                                <span id="busuanzi_value_page_pv"></span>
+                                {frontmatter.minutesRead}
                             </p>
                             {
                                 frontmatter.category && (
                                     <p class="inline-block mt-2 text-sm md:inline-block md:text-sm text-slate-200">
                                         <Icon class="inline-block" name="mdi:text-long" />
-                                        <a
-                                            href={`/categories/${frontmatter.category}`}
-                                        >
+                                        <a href={`/categories/${frontmatter.category}`}>
                                             {frontmatter.category}
                                         </a>
+                                    </p>
+                                )
+                            }
+                            <br/>
+                            {
+                                frontmatter.description && (
+                                    <p class="inline-block mt-2 text-sm md:inline-block md:text-sm text-slate-200">
+                                        {frontmatter.description}
                                     </p>
                                 )
                             }
                         </div>
                     </div>
                 </div>
-                <div id="slot" class="mx-auto prose prose-img:rounded-md prose-img:shadow-md my-10">
+                <div id="slot" class="mx-auto prose prose-img:rounded-md prose-img:shadow-md prose-img:mb-0 prose-img:pb-0 prose-video:rounded-md prose-video:shadow-md prose-video:mb-0 prose-video:pb-0 my-10">
                     <slot />
                 </div>
                 <section class="mx-auto w-full">
@@ -111,6 +117,13 @@ const { frontmatter, headings, rawContent } = Astro.props;
                 </section>
             </div>
         </article>
+
+        <script>
+            import { Fancybox } from "@fancyapps/ui";
+            import "@fancyapps/ui/dist/fancybox/fancybox.css";
+
+            Fancybox.bind('[data-fancybox]', {});
+        </script>
 
         <script>
             const slot = document.getElementById("slot")!;

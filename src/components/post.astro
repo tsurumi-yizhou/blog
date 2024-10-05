@@ -1,5 +1,4 @@
 ---
-import { cut } from "../utils/text";
 const { title, link, description, date, category } = Astro.props;
 ---
 
@@ -9,8 +8,8 @@ const { title, link, description, date, category } = Astro.props;
     <div class="card-body">
         <a href={link}>
             <h2 class="card-title">{title}</h2>
-            <p class="text-pretty font-light">
-                {cut(description)}
+            <p class="truncate text-pretty font-light">
+                {description}
             </p>
         </a>
         <div class="flex flex-wrap justify-between w-full">

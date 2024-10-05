@@ -5,7 +5,8 @@ import rehypeKatex from "rehype-katex";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
-import remarkQuoteImg from "./src/utils/quote.mjs";
+import remarkQuoteImg from "./src/utils/remarkImage.mjs";
+import {remarkReadingTime} from "./src/utils/remarkReadingTime.mjs";
 
 export default defineConfig({
   site: "https://blog.yizhou.ac.cn",
@@ -18,7 +19,8 @@ export default defineConfig({
     },
     remarkPlugins: [
         remarkMath,
-        remarkQuoteImg
+        remarkQuoteImg,
+        remarkReadingTime
     ],
     rehypePlugins: [
         rehypeKatex

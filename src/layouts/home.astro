@@ -18,52 +18,54 @@ const {title} = Astro.props;
             integrity="sha384-wcIxkf4k558AjM3Yz3BBFQUbk/zgIYC2R0QpeeYb+TwlBVMrlgLqwRjRtGZiK7ww"
             crossorigin="anonymous"
     />
-    <script>(function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-            'gtm.start':
-                new Date().getTime(), event: 'gtm.js'
-        });
-        var f = d.getElementsByTagName(s)[0],
-            j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src =
-            'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-KVW782Q5');</script>
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-KVW782Q5');
+    </script>
     <script
             is:inline
             async
             src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
-    ></script>
+    />
+    <script>
+        const theme = localStorage.getItem("theme");
+        const system = window.matchMedia("(prefers-color-scheme: light)").matches;
+        const body = document.getElementsByTagName("body")[0];
+        if ((theme == "system" && system) || theme == "light") {
+            body.setAttribute("data-theme", "emerald");
+        }
+        if ((theme == "system" && !system) || theme == "dark") {
+            body.setAttribute("data-theme", "dim");
+        }
+    </script>
 </head>
 <body>
-<noscript>
-    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVW782Q5"
-            height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
-<div class="min-h-screen flex flex-col">
-    <div class="sticky top-0 z-30 flex w-full justify-center backdrop-blur transition-shadow">
-        <TopBar/>
-    </div>
-    <div class="flex flex-grow justify-center my-10 mx-5">
-        <div class="mx-auto max-w-screen-lg">
-            <slot/>
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KVW782Q5"
+            height="0" width="0" style="display:none;visibility:hidden">
+        </iframe>
+    </noscript>
+    <div class="min-h-screen flex flex-col">
+        <div class="sticky top-0 z-30 flex w-full justify-center backdrop-blur transition-shadow">
+            <TopBar/>
         </div>
+        <div class="flex flex-grow justify-center my-10 mx-5">
+            <div class="mx-auto max-w-screen-lg">
+                <slot/>
+            </div>
+        </div>
+        <Bottom/>
     </div>
-    <Bottom/>
-</div>
 </body>
 </html>
-
-<script>
-    const theme = localStorage.getItem("theme");
-    const system = window.matchMedia("(prefers-color-scheme: light)").matches;
-    const body = document.getElementsByTagName("body")[0];
-    if ((theme == "system" && system) || theme == "light") {
-        body.setAttribute("data-theme", "emerald");
-    }
-    if ((theme == "system" && !system) || theme == "dark") {
-        body.setAttribute("data-theme", "dim");
-    }
-</script>
