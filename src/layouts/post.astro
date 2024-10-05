@@ -101,7 +101,10 @@ const { frontmatter, headings, rawContent } = Astro.props;
                         </div>
                     </div>
                 </div>
-                <div id="slot" class="mx-auto prose prose-img:rounded-md prose-img:shadow-md prose-img:mb-0 prose-img:pb-0 prose-video:rounded-md prose-video:shadow-md prose-video:mb-0 prose-video:pb-0 my-10">
+                <div id="slot"
+                     class="mx-auto my-10 prose
+                     prose-img:rounded-md prose-img:shadow-md prose-img:mb-0 prose-img:pb-0 prose-img:w-full
+                     prose-video:rounded-md prose-video:shadow-md prose-video:mb-0 prose-video:pb-0 prose-video:w-full">
                     <slot />
                 </div>
                 <section class="mx-auto w-full">
