@@ -7,7 +7,7 @@ const { name, link, avatar, description } = Astro.props;
 >
     <a href={link}>
         <figure>
-            <img class="rounded-lg w-full" alt="avatar" src={avatar} />
+            <img class="object-cover object-top rounded-lg w-full h-48" alt="avatar" src={avatar} />
         </figure>
         <div class="card-body">
             <h2 class="card-title">{name}</h2>

@@ -47,6 +47,12 @@
             "description": "In me the tiger sniffes the rose.",
             "link": "https://yuuuuang.com/",
             "avatar": "https://raw.githubusercontent.com/Shiyuang-scu/blog_img/master/118200.jpg"
+        },
+        {
+            "name": "CONNECT THE WORLD.",
+            "description": "I am researching Large Language Models (LLMs) and Multi-Agent System (MAS).",
+            "link": "https://teafrogsf.github.io/",
+            "avatar": "https://teafrogsf.github.io/assets/img/prof_pic.jpg"
         }
     ]
 }
