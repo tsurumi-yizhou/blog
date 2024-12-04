@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      DP_Id: ${{ secrets.DNS_POD_ID }}
-      DP_Key: ${{ secrets.DNS_POD_TOKEN }}
+      DP_Id: ${{ secrets.TENCENT_SECRET_ID }}
+      DP_Key: ${{ secrets.TENCENT_SECRET_KEY }}
 
     steps:
       - name: Install ACME.sh
@@ -22,8 +22,8 @@ jobs:
       - name: Depoly Cert
         uses: renbaoshuo/deploy-certificate-to-tencentcloud@v2
         with:
-          secret-id: ${{ secrets.SECRET_ID }}
-          secret-key: ${{ secrets.SECRET_KEY }}
+          secret-id: ${{ secrets.TENCENT_SECRET_ID }}
+          secret-key: ${{ secrets.TENCENT_SECRET_KEY }}
           fullchain-file: .acme.sh/yizhou.ac.cn_ecc/fullchain.cer
           key-file: .acme.sh/yizhou.ac.cn_ecc/yizhou.ac.cn.key
           cdn-domains: |
