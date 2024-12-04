@@ -1,0 +1,36 @@
+---
+import { Icon } from "astro-icon/components";
+import { count } from "../utils/countWords";
+
+const posts = await Astro.glob("../pages/posts/*.md");
+const words = await posts
+    .map((post) => count(post.rawContent()))
+    .reduce((a, b) => a + b)
+---
+
+<footer class="footer py-5 px-10 bg-base-200">
+    <aside class="">
+        <a href="https://beian.miit.gov.cn">
+            <span>苏ICP备2023037773</span>
+        </a>
+        <span>文章：{posts.length} 篇，总字数：{words} 字</span>
+        <span>Copyright © 2019-2024 Don Yihtseu(Tong Yizhou)</span>
+        <span id="busuanzi_container_site_pv">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+        </span>
+    </aside>
+    <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+        <a class="btn btn-ghost" href="https://x.com/tsurumi_yizhou">
+            <Icon name="mdi:twitter" size={32} />
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/tsurumi-yizhou">
+            <Icon name="mdi:github" size={32} />
+        </a>
+        <a class="btn btn-ghost" href="https://www.zhihu.com/people/lao-shen-gun-41">
+            <Icon name="simple-icons:zhihu" size={32} />
+        </a>
+        <a class="btn btn-ghost" href="mailto:tongyz2922@mails.jlu.edu.cn">
+            <Icon name="mdi:email" size={32} />
+        </a>
+    </nav>
+</footer>

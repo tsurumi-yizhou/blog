@@ -1,0 +1,17 @@
+---
+const { name, link, avatar, description } = Astro.props;
+---
+
+<div
+    class="card card-compact transition-all duration-200 hover:bg-base-200 hover:-translate-y-1"
+>
+    <a href={link}>
+        <figure>
+            <img class="object-cover object-top rounded-lg w-full h-48" alt="avatar" src={avatar} />
+        </figure>
+        <div class="card-body">
+            <h2 class="card-title">{name}</h2>
+            <p class="text-sm font-thin">{description}</p>
+        </div>
+    </a>
+</div>

@@ -1,0 +1,49 @@
+---
+interface Link {
+    depth: number;
+    slug: string;
+    text: string;
+}
+
+const { links } = Astro.props;
+---
+
+<ul class="block menu">
+    <li>
+        <h2 class="menu-title">On this page</h2>
+        <ul id="toc" class="menu">
+            {
+                links.map((link: Link) => (
+                    <li>
+                        <a class={`ml-${4*(link.depth - 1)}`} data-title={link.text} href={`#${link.slug}`}>
+                            <h3 class="font-mono">{link.text}</h3>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </li>
+</ul>
+
+<script>
+    const titles =
+        document.getElementById("toc")?.getElementsByTagName("a") ?? [];
+
+    for (const element of titles) {
+        element.addEventListener("click", () => {
+            const event = new CustomEvent("title", { detail: element.innerText})
+            window.dispatchEvent(event)
+        });
+    }
+
+    window.addEventListener("title", (event) => {
+        const title = (event as CustomEvent).detail
+        for (const element of titles) {
+            if (element.getAttribute("data-title") == title) {
+                element.classList.add("active");
+            } else {
+                element.classList.remove("active");
+            }
+        }
+    });
+</script>

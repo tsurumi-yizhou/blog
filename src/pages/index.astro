@@ -1,0 +1,57 @@
+---
+import Home from "../layouts/home.astro";
+import Post from "../components/post.astro";
+import CoveredCard from "../components/covered-card.astro";
+
+const data = await Astro.glob("./posts/*.md");
+const tops = data.filter((post) => post.frontmatter.top);
+const posts = data
+    .sort(
+        (a, b) =>
+            new Date(b.frontmatter.pubDate).getTime() -
+            new Date(a.frontmatter.pubDate).getTime(),
+    )
+    .slice(0, 10);
+---
+
+<Home title="Home">
+    <article class="mx-auto flex flex-col">
+        <section>
+            <header class="flex-grow pt-12 pb-12">
+                <h1 class="text-5xl font-bold">Featured</h1>
+            </header>
+            <main class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {
+                    tops.map((post) => (
+                        <CoveredCard
+                            title={post.frontmatter.title}
+                            cover={post.frontmatter.cover}
+                            date={new Date(post.frontmatter.pubDate)}
+                            description={post.frontmatter.description}
+                            link={post.url as string}
+                        />
+                    ))
+                }
+            </main>
+        </section>
+        <section>
+            <header class="flex-grow pt-12 pb-12">
+                <h1 class="text-5xl font-bold">Latest</h1>
+            </header>
+            <main class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {
+                    posts.map((post) => (
+                        <CoveredCard
+                            title={post.frontmatter.title}
+                            category={post.frontmatter.category}
+                            cover={post.frontmatter.cover}
+                            date={new Date(post.frontmatter.pubDate)}
+                            description={post.frontmatter.description}
+                            link={post.url as string}
+                        />
+                    ))
+                }
+            </main>
+        </section>
+    </article>
+</Home>

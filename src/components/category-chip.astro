@@ -1,0 +1,6 @@
+---
+const { category, selected } = Astro.props;
+---
+<a href={`/categories/${category}`} class="btn mx-3 my-1" class:list={[{ "btn-primary": selected }]}>
+    <span class="text-sm">{category}</span>
+</a>
