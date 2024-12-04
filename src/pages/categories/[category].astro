@@ -45,9 +45,18 @@ const categories = [
             posts
                 .filter((post) => post.frontmatter.category == category)
                 .map((post) => (
+                    post.frontmatter.cover ?
                     <CoveredCard
                         title={post.frontmatter.title}
                         cover={post.frontmatter.cover}
+                        date={new Date(post.frontmatter.pubDate)}
+                        description={post.frontmatter.description}
+                        link={post.url}
+                    />
+                    :
+                    <PlainCard
+                        title={post.frontmatter.title}
+                        category={post.frontmatter.category}
                         date={new Date(post.frontmatter.pubDate)}
                         description={post.frontmatter.description}
                         link={post.url}
