@@ -1,22 +1,14 @@
 ---
+import type { Post } from "../utils/getPosts";
+import { getPosts } from "../utils/getPosts";
 import Home from "../layouts/home.astro";
 
-const posts = (await Astro.glob("./posts/*.md"))
-    .map((post) => {
-        return {
-            title: post.frontmatter.title as string,
-            date: new Date(post.frontmatter.pubDate),
-            link: post.url as string,
-            description: post.frontmatter.description as string,
-            category: post.frontmatter.category as string,
-        };
-    })
-    .sort((a, b) => b.date.getTime() - a.date.getTime());
+const posts = await getPosts();
 ---
 
 <Home title="Timeline">
-    <section class="flex flex-col gap-6 ps-6 pt-6">
-        <header class="flex-grow pt-12 pb-8">
+    <section class="flex flex-col">
+        <header class="flex-grow">
             <h1 class="text-3xl md:text-5xl font-serif">Timeline</h1>
         </header>
         <ul
@@ -46,10 +38,10 @@ const posts = (await Astro.glob("./posts/*.md"))
                                     : "timeline-end mb-10"
                             }
                         >
-                            <time class="font-mono italic">{post.date.toLocaleDateString("zh-CN")}</time>
+                            <time class="font-mono italic">{post.pubDate.toLocaleDateString("zh-CN")}</time>
                             <a href={post.link}>
-                                <h3 class="text-lg font-black">{post.title}</h3>
-                                <p class="italic"> {post.description}</p>
+                                <h3 class="text-lg font-serif">{post.title}</h3>
+                                <p class="italic font-thin"> {post.description}</p>
                             </a>
                         </div>
                         <hr />

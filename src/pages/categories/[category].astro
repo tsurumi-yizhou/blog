@@ -4,12 +4,16 @@ import CategoryChip from "../../components/category-chip.astro";
 import CoveredCard from "../../components/covered-card.astro";
 import PlainCard from "../../components/plain-card.astro";
 import type { GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import type { Post } from "../../utils/getPosts";
+import { getPosts } from "../../utils/getPosts";
 
 export const getStaticPaths: GetStaticPaths = async () => {
-    return [
+  const posts = await getPosts();
+  return [
         ...new Set(
-            (await Astro.glob("../posts/*.md"))
-                .map((post) => post.frontmatter.category)
+            posts
+                .map((post) => post.category)
                 .flat(),
         ),
     ].map((category) => {
@@ -22,9 +26,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 const { category } = Astro.params;
-const posts = (await Astro.glob("../posts/*.md"));
+const posts = await getPosts();
 const categories = [
-    ...new Set(posts.map((post) => post.frontmatter.category).flat()),
+    ...new Set(posts.map((post) => post.category).flat()),
 ];
 ---
 
@@ -43,14 +47,14 @@ const categories = [
         <main class="grid grid-cols-1 pt-12 gap-y-6">
         {
             posts
-                .filter((post) => post.frontmatter.category == category)
+                .filter((post) => post.category == category)
                 .map((post) => (
                     <PlainCard
-                        title={post.frontmatter.title}
-                        category={post.frontmatter.category}
-                        date={new Date(post.frontmatter.pubDate)}
-                        description={post.frontmatter.description}
-                        link={post.url}
+                        title={post.title}
+                        category={post.category}
+                        date={post.pubDate}
+                        description={post.description}
+                        link={post.link}
                     />
                 ))
         }
@@ -77,14 +81,14 @@ const categories = [
             <main class="grid grid-cols-2">
             {
                 posts
-                    .filter((post) => post.frontmatter.category == category)
+                    .filter((post) => post.category == category)
                     .map((post) => (
                         <PlainCard
-                            title={post.frontmatter.title}
-                            category={post.frontmatter.category}
-                            date={new Date(post.frontmatter.pubDate)}
-                            description={post.frontmatter.description}
-                            link={post.url}
+                            title={post.title}
+                            category={post.category}
+                            date={post.pubDate}
+                            description={post.description}
+                            link={post.link}
                         />
                     ))
             }

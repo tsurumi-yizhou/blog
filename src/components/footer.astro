@@ -1,11 +1,12 @@
 ---
 import { Icon } from "astro-icon/components";
 import { count } from "../utils/countWords";
+import { getCollection } from "astro:content";
 
-const posts = await Astro.glob("../pages/posts/*.md");
+const posts = await getCollection("posts");
 const words = await posts
-    .map((post) => count(post.rawContent()))
-    .reduce((a, b) => a + b)
+    .map((post: any) => count(post.body))
+    .reduce((a: number, b: number) => a + b)
 ---
 
 <footer class="footer py-5 px-10 bg-base-200">

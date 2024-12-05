@@ -1,7 +1,9 @@
 ---
 import Home from "../layouts/home.astro";
 import FriendCard from "../components/friend-card.astro";
-import { friends } from "../data/friends.json";
+import { getCollection } from "astro:content";
+
+const friends = await getCollection("friends");
 ---
 
 <Home title="Friends">
@@ -13,12 +15,12 @@ import { friends } from "../data/friends.json";
             class="grid gap-x-6 gap-y-12 grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
         >
         {
-            friends.map((friend) => (
+            friends.map((friend: any) => (
                 <FriendCard
-                    name={friend.name}
-                    link={friend.link}
-                    avatar={friend.avatar}
-                    description={friend.description}
+                    name={friend.data.name}
+                    link={friend.data.link}
+                    avatar={friend.data.avatar}
+                    description={friend.data.description}
                 />
             ))
         }

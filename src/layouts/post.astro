@@ -3,7 +3,7 @@ import Home from "./home.astro";
 import Toc from "../components/content-table.astro";
 import { Icon } from "astro-icon/components";
 
-const { frontmatter, headings, rawContent } = Astro.props;
+const { frontmatter, headings } = Astro.props;
 ---
 
 <Home title={frontmatter.title}>
