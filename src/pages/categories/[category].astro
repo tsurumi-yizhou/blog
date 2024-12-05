@@ -45,15 +45,6 @@ const categories = [
             posts
                 .filter((post) => post.frontmatter.category == category)
                 .map((post) => (
-                    post.frontmatter.cover ?
-                    <CoveredCard
-                        title={post.frontmatter.title}
-                        cover={post.frontmatter.cover}
-                        date={new Date(post.frontmatter.pubDate)}
-                        description={post.frontmatter.description}
-                        link={post.url}
-                    />
-                    :
                     <PlainCard
                         title={post.frontmatter.title}
                         category={post.frontmatter.category}
@@ -67,12 +58,13 @@ const categories = [
     </section>
     <section class="hidden md:grid grid-cols-4">
         <aside class="col-span-1 menu rounded-box">
-            <li class="menu-title">Categories</li>
+            <li class="menu-title font-light">Categories</li>
             {
                 categories.map((it) => (
                     <li>
                         <a
                             href={`/categories/${it}`}
+                            class="font-thin"
                             class:list={[{ "active": it == category }]}
                         >
                             {it}

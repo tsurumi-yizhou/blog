@@ -1,6 +1,5 @@
 ---
 import Home from "../layouts/home.astro";
-import Post from "../components/post.astro";
 import CoveredCard from "../components/covered-card.astro";
 
 const data = await Astro.glob("./posts/*.md");
@@ -17,8 +16,8 @@ const posts = data
 <Home title="Home">
     <article class="mx-auto flex flex-col">
         <section>
-            <header class="flex-grow pt-12 pb-8">
-                <h1 class="text-5xl font-bold">Featured</h1>
+            <header class="flex-grow pb-8">
+                <h1 class="text-3xl md:text-5xl font-serif">Featured</h1>
             </header>
             <main class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {
@@ -36,7 +35,7 @@ const posts = data
         </section>
         <section>
             <header class="flex-grow pt-12 pb-8">
-                <h1 class="text-5xl font-bold">Latest</h1>
+                <h1 class="text-3xl md:text-5xl font-serif">Latest</h1>
             </header>
             <main class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {
