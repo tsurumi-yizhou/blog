@@ -13,7 +13,7 @@ const posts = defineCollection({
 });
 
 const friends = defineCollection({
-  type: "content",
+  type: "data",
   schema: z.object({
     name: z.string(),
     link: z.string(),
