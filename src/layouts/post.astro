@@ -108,12 +108,12 @@ const { frontmatter, headings } = Astro.props;
                     <slot />
                 </div>
                 <section class="mx-auto w-full">
-                    <script is:inline
+                    <script
                         src="https://giscus.app/client.js"
                         data-repo="tsurumi-yizhou/blog"
-                        data-repo-id="R_kgDOIR5z3g"
+                        data-repo-id="R_kgDONYuL0w"
                         data-category="Announcements"
-                        data-category-id="DIC_kwDOIR5z3s4CftST"
+                        data-category-id="DIC_kwDONYuL084Ck86R"
                         data-mapping="title"
                         data-strict="0"
                         data-reactions-enabled="1"
@@ -121,12 +121,24 @@ const { frontmatter, headings } = Astro.props;
                         data-input-position="bottom"
                         data-theme="preferred_color_scheme"
                         data-lang="zh-CN"
-                        data-loading="lazy"
                         crossorigin="anonymous"
-                        async></script>
+                        async>
+                    </script>
                 </section>
             </div>
         </article>
+
+        <script>
+            const theme = localStorage.getItem("theme");
+            const system = window.matchMedia("(prefers-color-scheme: light)").matches;
+            const body = document.getElementsByTagName("body")[0];
+            if ((theme == "system" && system) || theme == "light") {
+                body.setAttribute("data-theme", "emerald");
+            }
+            if ((theme == "system" && !system) || theme == "dark") {
+                body.setAttribute("data-theme", "dim");
+            }
+        </script>
 
         <script>
             import { Fancybox } from "@fancyapps/ui";
