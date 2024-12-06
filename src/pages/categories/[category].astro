@@ -1,11 +1,8 @@
 ---
-import Home from "../../layouts/home.astro";
+import HomeLayout from "../../layouts/home.astro";
 import CategoryChip from "../../components/category-chip.astro";
-import CoveredCard from "../../components/covered-card.astro";
 import PlainCard from "../../components/plain-card.astro";
 import type { GetStaticPaths } from "astro";
-import { getCollection } from "astro:content";
-import type { Post } from "../../utils/getPosts";
 import { getPosts } from "../../utils/getPosts";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -32,7 +29,7 @@ const categories = [
 ];
 ---
 
-<Home title={category}>
+<HomeLayout title={category}>
     <section class="block md:hidden">
         <header class="flex flex-wrap">
         {
@@ -95,4 +92,4 @@ const categories = [
             </main>
         </nav
     </section>
-</Home>
+</HomeLayout>

@@ -1,10 +1,12 @@
 ---
-import Home from "../layouts/home.astro";
+import HomeLayout from "../layouts/home.astro";
 ---
 
-<Home title="404">
-    <article class="prose">
-        <h1 class="m-10 text-4xl font-mono">Not Found!</h1>
+<HomeLayout title="404">
+    <header class="flex-grow pb-8">
+        <h1 class="text-3xl md:text-5xl font-serif">Not found!</h1>
+    </header>
+    <figure>
         <img alt="404" class="rounded-lg shadow-lg" src="/img/404.jpg" />
-    </article>
-</Home>
+    </figure>
+</HomeLayout>

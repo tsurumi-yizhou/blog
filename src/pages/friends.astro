@@ -1,12 +1,12 @@
 ---
-import Home from "../layouts/home.astro";
+import HomeLayout from "../layouts/home.astro";
 import FriendCard from "../components/friend-card.astro";
 import { getCollection } from "astro:content";
 
 const friends = await getCollection("friends");
 ---
 
-<Home title="Friends">
+<HomeLayout title="Friends">
     <section class="flex flex-col">
         <header class="flex-grow pb-8">
             <h1 class="text-3xl md:text-5xl font-serif">Friends</h1>
@@ -26,4 +26,4 @@ const friends = await getCollection("friends");
         }
         </main>
     </section>
-</Home>
+</HomeLayout>

@@ -1,12 +1,12 @@
 ---
-import Home from "./home.astro";
+import HomeLayout from "./home.astro";
 import Toc from "../components/content-table.astro";
 import { Icon } from "astro-icon/components";
 
 const { frontmatter, headings } = Astro.props;
 ---
 
-<Home title={frontmatter.title}>
+<HomeLayout title={frontmatter.title}>
     <div class="flex justify-center">
         <div
             class="hidden relative order-2 flex-grow ps-32 max-w-32 w-full md:block"
@@ -129,18 +129,6 @@ const { frontmatter, headings } = Astro.props;
         </article>
 
         <script>
-            const theme = localStorage.getItem("theme");
-            const system = window.matchMedia("(prefers-color-scheme: light)").matches;
-            const body = document.getElementsByTagName("body")[0];
-            if ((theme == "system" && system) || theme == "light") {
-                body.setAttribute("data-theme", "emerald");
-            }
-            if ((theme == "system" && !system) || theme == "dark") {
-                body.setAttribute("data-theme", "dim");
-            }
-        </script>
-
-        <script>
             import { Fancybox } from "@fancyapps/ui";
             import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
@@ -197,4 +185,4 @@ const { frontmatter, headings } = Astro.props;
             );
         </script>
     </div>
-</Home>
+</HomeLayout>

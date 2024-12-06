@@ -1,12 +1,11 @@
 ---
-import type { Post } from "../utils/getPosts";
 import { getPosts } from "../utils/getPosts";
-import Home from "../layouts/home.astro";
+import HomeLayout from "../layouts/home.astro";
 
 const posts = await getPosts();
 ---
 
-<Home title="Timeline">
+<HomeLayout title="Timeline">
     <section class="flex flex-col">
         <header class="flex-grow">
             <h1 class="text-3xl md:text-5xl font-serif">Timeline</h1>
@@ -50,4 +49,4 @@ const posts = await getPosts();
             }
         </ul>
     </section>
-</Home>
+</HomeLayout>
