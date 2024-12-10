@@ -22,7 +22,10 @@ const posts = defineCollection({
   loader: {
     name: "posts-loader",
     load: async (ctx: LoaderContext) => {
-      await glob({ pattern: "*.md", base: "src/content/posts" }).load(ctx);
+      await glob({
+        pattern: ["*.md", "*.mdx"],
+        base: "src/content/posts",
+      }).load(ctx);
       const files = await fs.readdir("src/content/posts");
       for (const file of files) {
         if (file.endsWith(".typ")) {
