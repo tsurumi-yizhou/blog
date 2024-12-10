@@ -16,10 +16,10 @@ export async function getPosts(): Promise<Post[]> {
     .map((post: any) => {
       return {
         title: post.data.title,
-        pubDate: post.data.pubDate,
+        pubDate: new Date(post.data.pubDate),
         category: post.data.category,
         description: post.data.description,
-        link: `/posts/${post.slug}`,
+        link: `/posts/${post.id}`,
         cover: post.data.cover,
         top: post.data.top,
       };

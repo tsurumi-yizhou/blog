@@ -2,8 +2,9 @@
 import HomeLayout from "./home.astro";
 import Toc from "../components/content-table.astro";
 import { Icon } from "astro-icon/components";
+import { count } from "../utils/countWords";
 
-const { frontmatter, headings } = Astro.props;
+const { frontmatter, headings, body } = Astro.props;
 ---
 
 <HomeLayout title={frontmatter.title}>
@@ -68,17 +69,7 @@ const { frontmatter, headings } = Astro.props;
                                     class="inline-block"
                                     name="mdi:typewriter"
                                 />
-                                {frontmatter.characters} words
-                            </p>
-                            <p
-                                id="busuanzi_container_page_pv"
-                                class="inline-block mt-2 mr-5 text-sm md:text-sm text-slate-200"
-                            >
-                                <Icon
-                                    class="inline-block"
-                                    name="mdi:eye-outline"
-                                />
-                                {frontmatter.minutesRead}
+                                {count(body)} words
                             </p>
                             {
                                 frontmatter.category && (
