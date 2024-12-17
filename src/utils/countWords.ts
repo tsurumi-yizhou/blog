@@ -1,4 +1,5 @@
-export function count(data: string) {
+export function count(data: string | undefined) {
+  if (!data) return 0;
   const cjkRegex = /[\u4e00-\u9fff\u3040-\u30ff\u31f0-\u31ff\uff66-\uff9f]/g;
   const cjkMatches = data.match(cjkRegex);
   const cjkCount = cjkMatches ? cjkMatches.length : 0;

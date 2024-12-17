@@ -5,7 +5,7 @@ interface Link {
     text: string;
 }
 
-const { links } = Astro.props;
+const headings = Astro.props.headings as Link[];
 ---
 
 <ul class="block menu">
@@ -13,9 +13,9 @@ const { links } = Astro.props;
         <h2 class="menu-title">On this page</h2>
         <ul id="toc" class="menu">
             {
-                links.map((link: Link) => (
-                    <li>
-                        <a class={`ml-${4*(link.depth - 1)}`} data-title={link.text} href={`#${link.slug}`}>
+                headings.map((link) => (
+                    <li class={`ml-${4 * link.depth - 1}`}>
+                        <a href={`#${link.slug}`}>
                             <h3 class="font-mono">{link.text}</h3>
                         </a>
                     </li>
@@ -26,24 +26,53 @@ const { links } = Astro.props;
 </ul>
 
 <script>
-    const titles =
-        document.getElementById("toc")?.getElementsByTagName("a") ?? [];
+const titles =
+  Array.from(document.getElementById("slot")!.querySelectorAll("h1, h2, h3, h4, h5, h6")!)
+    .map((element) => ({
+      slug: element.innerHTML,
+      position: element.getBoundingClientRect().top + window.scrollY,
+      self: element,
+    }))
 
-    for (const element of titles) {
-        element.addEventListener("click", () => {
-            const event = new CustomEvent("title", { detail: element.innerText})
-            window.dispatchEvent(event)
-        });
+const entries =
+  Array.from(document.getElementById("toc")!.querySelectorAll("a")!)
+    .map((element) => ({
+      slug: element.getElementsByTagName("h3")[0].innerHTML,
+      self: element,
+    }))
+
+const listener = () => {
+    const center = window.scrollY + window.innerHeight / 2;
+    let active = 0;
+    if (center <= titles[0].position) {
+        active = 0;
     }
-
-    window.addEventListener("title", (event) => {
-        const title = (event as CustomEvent).detail
-        for (const element of titles) {
-            if (element.getAttribute("data-title") == title) {
-                element.classList.add("active");
-            } else {
-                element.classList.remove("active");
-            }
+    for (let i = 0; i < titles.length - 1; i ++) {
+        if (titles[i].position <= center && center <= titles[i + 1].position) {
+            active = i;
+            break;
         }
-    });
+    }
+    if (center >= titles[titles.length - 1].position) {
+        active = titles.length - 1;
+    }
+    entries.forEach((entry, index) => {
+        if (index == active) {
+            entry.self.classList.add("active");
+        } else {
+            entry.self.classList.remove("active");
+        }
+    })
+}
+
+window.onload = listener
+window.addEventListener("scroll", listener)
+
+entries.forEach((entry, index) => {
+    entry.self.addEventListener("click", (event) => {
+        event.preventDefault();
+        const offset = titles[index].position - window.innerHeight / 2 + titles[index].self.scrollHeight
+        window.scrollTo({ top: offset, behavior: "smooth" });
+    })
+})
 </script>
