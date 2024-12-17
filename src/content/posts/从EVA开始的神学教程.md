@@ -1,5 +1,4 @@
 ---
-title: 从《EVA》开始的神学教程
 pubDate: 2023-07-19
 category: 古典学与神秘学
 description:  God’s in his heaven, All rights’ with the world.

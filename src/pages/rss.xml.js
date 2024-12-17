@@ -20,8 +20,9 @@ export async function GET(context) {
           pubDate: post.pubDate,
           description: post.description,
           link: post.link,
+          id: post.link,
           content: sanitizeHtml(
-            parser.render((await getEntry("posts", post.id)).body),
+            parser.render((await getEntry("posts", post.title)).body),
             {
               allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
             }

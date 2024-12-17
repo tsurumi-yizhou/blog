@@ -1,7 +1,6 @@
 import { getCollection } from "astro:content";
 
 export interface Post {
-  id: string;
   title: string;
   pubDate: Date;
   description: string;
@@ -16,8 +15,7 @@ export async function getPosts(): Promise<Post[]> {
   return posts
     .map((post: any) => {
       return {
-        id: post.id,
-        title: post.data.title,
+        title: post.id,
         pubDate: new Date(post.data.pubDate),
         category: post.data.category,
         description: post.data.description,

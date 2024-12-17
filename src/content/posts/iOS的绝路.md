@@ -1,5 +1,4 @@
 ---
-title: iOS的绝路
 pubDate: 2024-06-20
 category: 计算机工程学
 description: iOS所谓的墓碑机制，是一种落后的体现，只符合落后的国情。

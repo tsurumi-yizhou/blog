@@ -1,5 +1,4 @@
 ---
-title: 从QFT到GPT
 category: 东拉西扯集
 pubDate: 2024-12-18
 description: 从标准模型出发推导神经网络，还原论爱好者狂喜

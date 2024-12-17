@@ -6,13 +6,11 @@ import { render } from "astro:content";
 
 export const getStaticPaths: GetStaticPaths = async () => {
     return (await getCollection("posts"))
-      .map((post: any) => {
-        return {
-            params: {
-                slug: post.id,
-            },
-        };
-    });
+      .map((post: any) => ({
+          params: {
+              slug: post.id,
+          },
+      }));
 }
 
 const { slug } = Astro.params;
@@ -20,6 +18,6 @@ const post = await getEntry("posts", slug as string);
 const frontmatter = post!!.data;
 const { headings, Content } = await render(post!!);
 ---
-<PostLayout frontmatter={frontmatter} headings={headings} body={post!!.body}>
+<PostLayout title={slug} frontmatter={frontmatter} headings={headings} body={post!!.body}>
     <Content />
 </PostLayout>

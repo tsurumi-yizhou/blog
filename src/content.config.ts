@@ -9,7 +9,6 @@ import {
 import { glob, type LoaderContext } from "astro/loaders";
 
 const postSchema = z.object({
-  title: z.string(),
   pubDate: z.string().or(z.date()),
   description: z.string(),
   category: z.string(),

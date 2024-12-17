@@ -13,13 +13,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
                 .map((post) => post.category)
                 .flat(),
         ),
-    ].map((category) => {
-        return {
-            params: {
-                category: category
-            },
-        };
-    });
+    ].map((category) => ({
+        params: {
+            category: category
+        },
+    }));
 }
 
 const { category } = Astro.params;

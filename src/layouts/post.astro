@@ -4,10 +4,10 @@ import Toc from "../components/content-table.astro";
 import { Icon } from "astro-icon/components";
 import { count } from "../utils/countWords";
 
-const { frontmatter, headings, body } = Astro.props;
+const { title, frontmatter, headings, body } = Astro.props;
 ---
 
-<HomeLayout title={frontmatter.title}>
+<HomeLayout title={title}>
     <div class="flex justify-center">
         <div
             class="hidden md:block relative order-2 flex-grow ps-4 lg:ps-24 max-w-32 w-full"
@@ -28,7 +28,7 @@ const { frontmatter, headings, body } = Astro.props;
             >
                 <div class="flex items-center h-full bg-opacity-30">
                     <div class="max-w-xl px-5 md:px-10">
-                        <h2 class="text-3xl font-serif text-white capitalize break-normal line-clamp-4">{frontmatter.title}</h2>
+                        <h2 class="text-3xl font-serif text-white capitalize break-normal line-clamp-4">{title}</h2>
                         <p class="inline-block mt-2 mr-5 text-sm md:text-sm text-slate-200">
                             <Icon
                                 class="inline-block"
