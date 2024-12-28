@@ -1,0 +1,52 @@
+---
+import { getPosts } from "../utils/getPosts";
+import HomeLayout from "../layouts/home.astro";
+import CoveredCard from "../components/covered-card.astro";
+
+const posts = await getPosts();
+const topPosts = posts.filter((post) => post.top);
+const latestPosts = posts.slice(0, 10);
+---
+
+<HomeLayout title="Home">
+    <article class="mx-auto flex flex-col">
+        <section>
+            <header class="flex-grow pb-8">
+                <h1 class="text-3xl md:text-5xl font-serif">Featured</h1>
+            </header>
+            <main class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {
+                    topPosts.map((post) => (
+                        <CoveredCard
+                            title={post.title}
+                            cover={post.cover}
+                            date={post.pubDate}
+                            description={post.description}
+                            link={post.link}
+                        />
+                    ))
+                }
+            </main>
+        </section>
+        <div class="divider" />
+        <section>
+            <header class="flex-grow pt-12 pb-8">
+                <h1 class="text-3xl md:text-5xl font-serif">Latest</h1>
+            </header>
+            <main class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {
+                    latestPosts.map((post) => (
+                        <CoveredCard
+                            title={post.title}
+                            category={post.category}
+                            cover={post.cover}
+                            date={post.pubDate}
+                            description={post.description}
+                            link={post.link}
+                        />
+                    ))
+                }
+            </main>
+        </section>
+    </article>
+</HomeLayout>

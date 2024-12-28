@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import HomeLayout from "../layouts/home.astro";
+
+const papers = await getCollection("papers");
+---
+<HomeLayout title="Reading">
+    <header class="flex-grow pb-8">
+        <h1 class="text-3xl md:text-5xl font-serif">Reading</h1>
+    </header>
+    <div class="divider" />
+    { papers.map(paper => (
+        <a href={paper.data.link} class="flex flex-col pb-8">
+            <h2 class="text-lg font-serif hover:link">{paper.data.title}</h2>
+            <p class="text-sm font-mono text-left">{paper.data.authors}</p>
+            <p class="text-sm font-mono hidden md:block">{paper.data.date}</p>
+        </a>
+    ))}
+</HomeLayout>

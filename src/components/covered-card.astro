@@ -1,0 +1,14 @@
+---
+const { title, cover, date, description, link } = Astro.props;
+---
+
+<a class="card card-compact card-side duration-200 hover:bg-base-200 hover:-translate-y-1" href={link}>
+    <figure class="flex-none object-cover w-48 h-48">
+        <img class="object-cover w-full h-full" src={cover ?? "/img/about.jpg"} alt="Cover" />
+    </figure>
+    <section class="card-body h-48">
+        <h2 class="card-title font-serif">{title}</h2>
+        <p class="text-pretty font-light line-clamp-5">{description}</p>
+        <p class="text-sm font-thin">{date.toLocaleDateString("zh-SG")}</p>
+    </section>
+</a>

@@ -1,0 +1,32 @@
+---
+import HomeLayout from "../layouts/home.astro";
+import FriendCard from "../components/friend-card.astro";
+import { getCollection } from "astro:content";
+
+const friends = (await getCollection("friends"))
+                    .sort(() => Math.random() - Math.random());
+console.log(friends)
+---
+
+<HomeLayout title="Friends">
+    <section class="flex flex-col">
+        <header class="flex-grow pb-8">
+            <h1 class="text-3xl md:text-5xl font-serif">Friends</h1>
+        </header>
+        <div class="divider" />
+        <main
+            class="grid gap-x-6 gap-y-12 grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        >
+        {
+            friends.map((friend: any) => (
+                <FriendCard
+                    name={friend.data.name}
+                    link={friend.data.link}
+                    avatar={friend.data.avatar}
+                    description={friend.data.description}
+                />
+            ))
+        }
+        </main>
+    </section>
+</HomeLayout>
