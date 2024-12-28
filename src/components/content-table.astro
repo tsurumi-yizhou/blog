@@ -14,9 +14,9 @@ const headings = Astro.props.headings as Link[];
         <ul id="toc" class="menu">
             {
                 headings.map((link) => (
-                    <li class={`ml-${4 * link.depth - 1}`}>
+                    <li >
                         <a href={`#${link.slug}`}>
-                            <h3 class="font-mono">{link.text}</h3>
+                            <h3 class:list={['ms-' + `${4 * link.depth - 4}`]} class="font-mono">{link.text}</h3>
                         </a>
                     </li>
                 ))
