@@ -3,7 +3,7 @@ const { title, link, description, date, category } = Astro.props;
 ---
 
 <div
-    class="card card-compact duration-200 hover:bg-base-200 hover:-translate-y-1"
+    class="card duration-200 hover:bg-base-200 hover:-translate-y-1"
 >
     <section class="card-body">
         <a href={link}>
@@ -12,13 +12,13 @@ const { title, link, description, date, category } = Astro.props;
                 {description}
             </p>
         </a>
-        <detail class="flex flex-wrap justify-between w-full">
+        <div class="flex flex-wrap justify-between w-full">
             <p class="text-sm font-thin">
                 {date.toLocaleDateString("zh-SG")}
             </p>
             <a href={`/categories/${category}`} class="text-sm font-thin">
                 {category}
             </a>
-        </detail>
+        </div>
     </section>
 </div>

@@ -7,6 +7,7 @@ import {
   loadHeadings,
 } from "./utils/loadTypst";
 import { glob, type LoaderContext } from "astro/loaders";
+// @ts-ignore
 import pkg from "zotero-api-client";
 const { default: api } = pkg;
 
@@ -20,32 +21,7 @@ const postSchema = z.object({
 
 const posts = defineCollection({
   schema: postSchema,
-  loader: {
-    name: "posts-loader",
-    load: async (ctx: LoaderContext) => {
-      await glob({ pattern: "*.md", base: "src/content/posts" }).load(ctx);
-      const files = await fs.readdir("src/content/posts");
-      for (const file of files) {
-        if (file.endsWith(".typ")) {
-          const frontmatter = await loadMeta(file);
-          const body = await loadBody(file);
-          const html = await loadRendered(file);
-          const headings = loadHeadings(body);
-          ctx.store.set({
-            id: file.replace(".typ", ""),
-            data: frontmatter,
-            body: body,
-            rendered: {
-              html: html,
-              metadata: {
-                headings: headings,
-              },
-            },
-          });
-        }
-      }
-    },
-  },
+  loader: glob({ pattern: "*.md", base: "src/content/posts" })
 });
 
 const friends = defineCollection({
@@ -68,39 +44,42 @@ const papers = defineCollection({
   loader: {
     name: "papers-loader",
     load: async (ctx: LoaderContext) => {
-      const library = api(process.env.ZOTERO_API_TOKEN).library(
-        "user",
-        process.env.ZOTERO_USER_ID
-      );
-      const items = await library.items().get();
-      items
-        .getData()
-        .filter((item: any) => item.parentItem == undefined)
-        .forEach((item: any) => {
-          ctx.store.set({
-            id: item.key,
-            data: {
-              title: item.title,
-              authors: (item.creators ?? [])
-                .map((creator: any) => {
-                  if (creator.firstName === "" || creator.lastName === "") {
-                    return creator.firstName + creator.lastName;
-                  }
-                  const cjk = /^[\u4e00-\u9fff]+$/;
-                  if (
-                    cjk.test(creator.firstName) &&
-                    cjk.test(creator.lastName)
-                  ) {
-                    return creator.lastName + creator.firstName;
-                  }
-                  return creator.firstName + " " + creator.lastName;
-                })
-                .join(", "),
-              link: item.url,
-              date: item.date,
-            },
-          });
-        });
+      try {
+        const library = api(process.env.ZOTERO_API_TOKEN).library(
+            "user",
+            process.env.ZOTERO_USER_ID
+        );
+        (await library.items().get())
+            .getData()
+            .filter((item: any) => item.parentItem == undefined)
+            .forEach((item: any) => {
+              ctx.store.set({
+                id: item.key,
+                data: {
+                  title: item.title,
+                  authors: (item.creators ?? [])
+                      .map((creator: any) => {
+                        if (creator.firstName === "" || creator.lastName === "") {
+                          return creator.firstName + creator.lastName;
+                        }
+                        const cjk = /^[\u4e00-\u9fff]+$/;
+                        if (
+                            cjk.test(creator.firstName) &&
+                            cjk.test(creator.lastName)
+                        ) {
+                          return creator.lastName + creator.firstName;
+                        }
+                        return creator.firstName + " " + creator.lastName;
+                      })
+                      .join(", "),
+                  link: item.url,
+                  date: item.date,
+                },
+              });
+            });
+      } catch (e) {
+        console.error(e);
+      }
     },
   },
 });

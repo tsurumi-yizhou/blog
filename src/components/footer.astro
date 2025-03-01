@@ -1,25 +1,18 @@
 ---
 import { Icon } from "astro-icon/components";
-import { count } from "../utils/countWords";
-import { getCollection } from "astro:content";
-
-const posts = await getCollection("posts");
-const words = await posts
-    .map((post: any) => count(post.body))
-    .reduce((a: number, b: number) => a + b)
 ---
 
-<footer class="footer py-5 px-10 bg-base-200">
-    <aside class="">
-        <a href="https://beian.miit.gov.cn">
-            <span>苏ICP备2023037773</span>
+<footer class="footer md:footer-horizontal py-5 px-10 bg-base-200">
+    <aside>
+        <a href="https://beian.mps.gov.cn/#/query/webSearch?code=32060202002128">
+            苏公网安备32060202002128号
         </a>
-        <span>文章：{posts.length} 篇，总字数：{words} 字</span>
-        <span>Copyright © 2019-2024 Don Yihtseu(Tong Yizhou)</span>
-        <span id="busuanzi_container_site_pv">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-        </span>
+        <a href="https://beian.miit.gov.cn/">
+            苏ICP备2023037773
+        </a>
+        <span>Copyright © 2019-2025 Tong Yizhou</span>
     </aside>
+
     <nav class="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
         <a class="btn btn-ghost" href="https://x.com/tsurumi_yizhou">
             <Icon name="mdi:twitter" size={32} />
