@@ -55,22 +55,24 @@ const categories = [
         }
         </main>
     </section>
-    <section class="hidden md:grid grid-cols-4">
-        <aside class="col-span-1 menu rounded-box">
-            <li class="menu-title font-light">Categories</li>
-            {
-                categories.map((it) => (
-                    <li>
-                        <a
-                            href={`/categories/${it}`}
-                            class="font-thin"
-                            class:list={[{ "active": it == category }]}
-                        >
-                            {it}
-                        </a>
-                    </li>
-                ))
-            }
+    <section class="hidden md:grid grid-cols-4 gap-x-4">
+        <aside class="col-span-1">
+            <ul class="mt-8 menu bg-base-200 rounded-box">
+                <li class="menu-title font-light">Categories</li>
+                {
+                    categories.map((it) => (
+                            <li>
+                                <a
+                                        href={`/categories/${it}`}
+                                        class="font-thin"
+                                        class:list={[{ "menu-active": it == category }]}
+                                >
+                                    {it}
+                                </a>
+                            </li>
+                    ))
+                }
+            </ul>
         </aside>
         <nav class="col-span-3">
             <main class="grid grid-cols-2">
@@ -88,6 +90,6 @@ const categories = [
                     ))
             }
             </main>
-        </nav
+        </nav>
     </section>
 </HomeLayout>
