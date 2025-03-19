@@ -3,13 +3,12 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@tailwindcss/vite";
 import icon from "astro-icon";
-import pagefind from "astro-pagefind";
 import remarkQuoteImg from "./src/utils/remarkImage.ts";
 
 export default defineConfig({
     site: "https://blog.yizhou.ac.cn",
     output: "static",
-    integrations: [mdx({}), sitemap({}), icon(), pagefind({})],
+    integrations: [mdx({}), sitemap({}), icon()],
     vite: {
         plugins: [tailwind()]
     },

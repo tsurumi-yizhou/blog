@@ -25,7 +25,7 @@
         "@iconify-json/fa-regular": "^1.2.1",
         "@iconify-json/fa-solid": "^1.2.1",
         "@tailwindcss/typography": "^0.5.16",
-        "daisyui": "^5.0.4",
+        "daisyui": "^5.0.6",
         "unist-util-visit": "^5.0.0"
     }
 }
