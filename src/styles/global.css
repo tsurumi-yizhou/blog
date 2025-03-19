@@ -1,0 +1,6 @@
+@import "../../node_modules/tailwindcss";
+
+@plugin "daisyui" {
+    themes: emerald, winter, dim;
+}
+@plugin "@tailwindcss/typography";

@@ -1,0 +1,31 @@
+{
+    "name": "blog",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "astro dev --host",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "dependencies": {
+        "@astrojs/check": "0.9.4",
+        "@astrojs/mdx": "^4.2.1",
+        "@astrojs/rss": "4.0.11",
+        "@astrojs/sitemap": "^3.3.0",
+        "@fancyapps/ui": "^5.0.36",
+        "@tailwindcss/vite": "^4.0.14",
+        "astro": "5.5.3",
+        "astro-icon": "^1.1.5",
+        "tailwindcss": "^4.0.14",
+        "typescript": "^5.8.2"
+    },
+    "devDependencies": {
+        "@iconify-json/fa-brands": "^1.2.1",
+        "@iconify-json/fa-regular": "^1.2.1",
+        "@iconify-json/fa-solid": "^1.2.1",
+        "@tailwindcss/typography": "^0.5.16",
+        "daisyui": "^5.0.4",
+        "unist-util-visit": "^5.0.0"
+    }
+}

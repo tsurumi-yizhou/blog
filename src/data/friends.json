@@ -1,0 +1,64 @@
+{
+    "friends": [
+        {
+            "name": "CarOL的小站",
+            "description": "CarOL的博客",
+            "link": "https://blog.scubot.com/",
+            "avatar": "https://imgbed.scubot.com/new_avatar"
+        },
+        {
+            "name": "序时录",
+            "description": "来自后现代的反思和反叛",
+            "link": "https://prologue.dev",
+            "avatar": "https://prologue.dev/_next/image?url=%2Fstatic%2Ffavicons%2Favatar.png&w=256&q=75"
+        },
+        {
+            "name": "Pil0tXia - 浮笙事记",
+            "description": "不会摄影的白帽子不是好机长！",
+            "link": "https://www.pil0txia.com",
+            "avatar": "https://static.pil0txia.com/assets/03_3_600p.webp"
+        },
+        {
+            "name": "rercel",
+            "description": "哲学片段与学术之路",
+            "link": "https://pathos.page/",
+            "avatar": "https://pathos.page/images/icons/apple-touch-icon.png"
+        },
+        {
+            "name": "拾月",
+            "link": "https://www.skyue.com/",
+            "description": "晚来天欲雪，能饮一杯无",
+            "avatar": "https://www.skyue.com/favicon.ico"
+        },
+        {
+            "name": "CONNECT THE WORLD.",
+            "description": "I am researching Large Language Models (LLMs) and Multi-Agent System (MAS).",
+            "link": "https://teafrogsf.github.io/",
+            "avatar": "https://teafrogsf.github.io/assets/img/prof_pic.jpg"
+        },
+        {
+            "name": "TuboHsu",
+            "description": "这是一只普通的Geek，应该不是一只猫。",
+            "link": "https://owow.cc/",
+            "avatar": "https://avatars.githubusercontent.com/u/47477044"
+        },
+        {
+            "name": "ykiko",
+            "description": "understand the trade-offs",
+            "link": "https://ykiko.me",
+            "avatar": "https://ykiko.me/img/author_hu12645359616066712621.jpg"
+        },
+        {
+            "name": "Yuang's Blog",
+            "description": "In me the tiger sniffes the rose.",
+            "link": "https://yuuuuang.com/",
+            "avatar": "https://raw.githubusercontent.com/Shiyuang-scu/blog_img/master/118200.jpg"
+        },
+        {
+            "name": "涓滴意念汇成河",
+            "description": "管它真理无穷，走一程有一程的风景，进一步有一步的欢喜。",
+            "link": "https://www.zahui.top/",
+            "avatar": "https://www.zahui.top/static/img/logo.jpg"
+        }
+    ]
+}

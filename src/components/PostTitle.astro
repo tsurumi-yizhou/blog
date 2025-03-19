@@ -1,0 +1,37 @@
+---
+const {title, frontmatter, words} = Astro.props;
+const cover = (frontmatter.cover ?? "/img/about.jpg") + "?imageView2/2/w/800/h/600/ignore-error/1";
+const pubDate = new Date(frontmatter.pubDate);
+const description = frontmatter.description;
+---
+<div
+        class="h-64 overflow-hidden bg-cover bg-center rounded-md"
+        style={`background-image: url("${cover}")`}
+>
+    <div class="flex items-center h-full bg-opacity-30">
+        <div class="max-w-xl px-5 md:px-10">
+            <h2 class="text-3xl font-serif mix-blend-difference text-white capitalize break-normal line-clamp-4">{title}</h2>
+            <p class="inline-block mt-2 mr-5 text-sm md:text-sm  mix-blend-difference text-slate-200">
+                {
+                    pubDate.toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                        weekday: "long"
+                    })
+                }
+            </p>
+            <p class="inline-block mt-2 mr-5 text-sm md:text-sm mix-blend-difference text-slate-200">
+                {words} words
+            </p>
+            <br/>
+            {
+                description && (
+                            <p class="inline-block mt-2 text-sm md:inline-block md:text-sm mix-blend-difference text-white">
+                                {description}
+                            </p>
+                )
+            }
+        </div>
+    </div>
+</div>
