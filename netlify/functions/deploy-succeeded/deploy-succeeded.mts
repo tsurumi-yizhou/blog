@@ -1,6 +1,7 @@
 import type {Context} from "@netlify/functions";
-import {Client} from "tencentcloud-sdk-nodejs-cdn/tencentcloud/services/cdn/v20180606/cdn_client";
 import type {PurgePathCacheRequest} from "tencentcloud-sdk-nodejs-cdn/tencentcloud/services/cdn/v20180606/cdn_models";
+
+const Client = require("tencentcloud-sdk-nodejs-cdn").cdn.v20180606.Client;
 
 export default (request: Request, context: Context) => {
     const client = new Client({
@@ -10,10 +11,14 @@ export default (request: Request, context: Context) => {
         },
         profile: {
             httpProfile: {
-                endpoint: "https://blog.yizhou.ac.cn/"
+                endpoint: "cdn.tencentcloudapi.com"
             }
         }
     })
-    context.waitUntil(client.PurgePathCache({} as PurgePathCacheRequest));
+    const params = {
+        Paths: ["https://blog.yizhou.ac.cn/"],
+        FlushType: "flush"
+    };
+    context.waitUntil(client.PurgePathCache(params as PurgePathCacheRequest));
     return new Response("Ok");
 }
