@@ -1,15 +1,14 @@
 ---
-import Base from "./Base.astro";
 import ContentTable from "../components/ContentTable.astro";
 import PostTitle from "../components/PostTitle.astro";
 import {count} from "../utils/countWords";
+import App from "../App.astro";
 
 const {url, frontmatter, headings, rawContent} = Astro.props;
 const title = url.split("/").pop();
 const words = count(rawContent())
 ---
-
-<Base title={title}>
+<App title={title}>
     <div class="flex justify-center">
         <div class="hidden md:block relative order-2 flex-grow ps-4 lg:ps-24 max-w-32 w-full">
             {
@@ -30,4 +29,4 @@ const words = count(rawContent())
             </div>
         </article>
     </div>
-</Base>
+</App>

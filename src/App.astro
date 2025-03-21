@@ -1,5 +1,7 @@
 ---
 import "./styles/global.css";
+import BottomBar from "./components/BottomBar.astro";
+import TopBar from "./components/TopBar.astro";
 
 const {title} = Astro.props;
 ---
@@ -39,7 +41,18 @@ const {title} = Astro.props;
 <noscript>
     <iframe class="hidden w-0 h-0" src="https://www.googletagmanager.com/ns.html?id=GTM-KVW782Q5"/>
 </noscript>
-<slot/>
+<div class="min-h-screen flex flex-col">
+    <div class="sticky top-0 z-30 flex w-full justify-center bg-base-100 transition-shadow">
+        <TopBar/>
+    </div>
+    <div class="flex flex-grow justify-center my-10 mx-5">
+        <div class="mx-auto max-w-screen-lg">
+            <slot/>
+        </div>
+    </div>
+
+    <BottomBar/>
+</div>
 <script>
     import {Fancybox} from "@fancyapps/ui";
     import "@fancyapps/ui/dist/fancybox/fancybox.css";

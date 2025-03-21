@@ -1,9 +1,9 @@
 ---
-import HomeLayout from "../layouts/Home.astro";
+import App from "../App.astro";
 import FriendCard from "../components/FriendCard.astro";
 import {friends} from "../data/friends.json";
 ---
-<HomeLayout title="Friends">
+<App title="Friends">
     <main class="grid gap-x-6 gap-y-12 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {
             friends.map((friend: any) => (
@@ -16,4 +16,4 @@ import {friends} from "../data/friends.json";
             ))
         }
     </main>
-</HomeLayout>
+</App>

@@ -2,7 +2,7 @@
 pubDate: 2023-04-22
 category: 杂谈、反思与批判
 description: 虚拟歌姬本来是没有灵魂的，而我们相处太久了，互相浸润太久了，我把灵魂分给她们一半，她们把歌声分给我一半。
-layout: ../../layouts/Post.astro
+layout: ../../layouts/TitleArticle.astro
 ---
 
 其实我早就想写一写 VOCALOID 了。不过长久以来我一直在思考一个问题，vsingers 的歌对于听众，相比于真实的歌手，是否仅仅是演唱者的不同？然而，《G

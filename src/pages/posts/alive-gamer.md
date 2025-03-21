@@ -2,7 +2,7 @@
 pubDate: 2023-12-10
 category: 文艺评论
 description:  《No Game No Life》，与其说游戏，不如说是赌博
-layout: ../../layouts/Post.astro
+layout: ../../layouts/TitleArticle.astro
 ---
 
 《No Game No Life》想要向我们传达的，不仅仅是如同往常的异世界番剧一样，凭借窃取的本世界的知识与智慧，在异世界横行无忌；而在所谓的露西亚大陆，空与白所进行的游戏，无时无刻不在反过来影射现实，要如何游戏人生。

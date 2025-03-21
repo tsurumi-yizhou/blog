@@ -2,7 +2,7 @@
 pubDate: 2024-06-20
 category: 计算机工程学
 description: iOS所谓的墓碑机制，是一种落后的体现，只符合落后的国情。
-layout: ../../layouts/Post.astro
+layout: ../../layouts/TitleArticle.astro
 ---
 
 Android 的四大 Component 框架，是完全基于 OOP 而实现的，从设计而言，是遥遥领先的。iOS 的架构设计，无非承 Unix 之祖制，就是现在，在
