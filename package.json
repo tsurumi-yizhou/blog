@@ -14,10 +14,12 @@
         "@astrojs/rss": "4.0.11",
         "@astrojs/sitemap": "^3.3.0",
         "@fancyapps/ui": "^5.0.36",
+        "@netlify/functions": "^3.0.4",
         "@tailwindcss/vite": "^4.0.14",
         "astro": "5.5.3",
         "astro-icon": "^1.1.5",
         "tailwindcss": "^4.0.14",
+        "tencentcloud-sdk-nodejs-cdn": "^4.0.1029",
         "typescript": "^5.8.2"
     },
     "devDependencies": {
