@@ -1,8 +1,8 @@
-import {Client} from "tencentcloud-sdk-nodejs-cdn/tencentcloud/services/cdn/v20180606/cdn_client";
 import type {Context} from "@netlify/functions";
+import {Client} from "tencentcloud-sdk-nodejs-cdn/tencentcloud/services/cdn/v20180606/cdn_client";
 import type {PurgePathCacheRequest} from "tencentcloud-sdk-nodejs-cdn/tencentcloud/services/cdn/v20180606/cdn_models";
 
-export default async (request: Request, context: Context) => {
+export default (request: Request, context: Context) => {
     const client = new Client({
         credential: {
             secretId: process.env.SECRET_ID,
@@ -10,10 +10,10 @@ export default async (request: Request, context: Context) => {
         },
         profile: {
             httpProfile: {
-                endpoint: "https://blog.yizhou.ac.cn"
+                endpoint: "https://blog.yizhou.ac.cn/"
             }
         }
     })
     context.waitUntil(client.PurgePathCache({} as PurgePathCacheRequest));
-    return new Response("OK")
+    return new Response("Ok");
 }
