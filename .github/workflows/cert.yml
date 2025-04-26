@@ -1,0 +1,34 @@
+name: Cert
+
+on:
+  schedule:
+    - cron: "0 0 1 1,4,7,10 *"
+  workflow_dispatch:
+
+jobs:
+  cert:
+    runs-on: ubuntu-latest
+
+    env:
+      DP_Id: ${{ secrets.DNS_POD_ID }}
+      DP_Key: ${{ secrets.DNS_POD_KEY }}
+
+    steps:
+      - name: Install ACME.sh
+        run: curl https://get.acme.sh | sh -s email=i@yizhou.ac.cn
+
+      - name: Generate Cert
+        run: |
+          /home/runner/.acme.sh/acme.sh --issue --dns dns_dp -d blog.yizhou.ac.cn -d static.yizhou.ac.cn
+          /home/runner/.acme.sh/acme.sh --install-cert -d blog.yizhou.ac.cn -d static.yizhou.ac.cn --key-file ./key.pem --fullchain-file ./fullchain.pem
+
+      - name: Depoly Cert
+        uses: renbaoshuo/deploy-certificate-to-tencentcloud@v2
+        with:
+          secret-id: ${{ secrets.TENCENT_SECRET_ID }}
+          secret-key: ${{ secrets.TENCENT_SECRET_KEY }}
+          fullchain-file: ./fullchain.pem
+          key-file: ./key.pem
+          cdn-domains: |
+            blog.yizhou.ac.cn
+            static.yizhou.ac.cn

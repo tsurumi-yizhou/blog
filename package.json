@@ -1,0 +1,38 @@
+{
+    "name": "blog",
+    "type": "module",
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "astro dev --host",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "dependencies": {
+        "@astrojs/check": "0.9.4",
+        "@astrojs/mdx": "^4.2.5",
+        "@astrojs/rss": "4.0.11",
+        "@astrojs/sitemap": "^3.3.1",
+        "@astrojs/webapi": "^3.0.0",
+        "@fancyapps/ui": "^5.0.36",
+        "@netlify/functions": "^3.1.2",
+        "@tailwindcss/vite": "^4.1.4",
+        "@types/node": "^22.15.2",
+        "astro": "5.6.1",
+        "astro-expressive-code": "^0.40.2",
+        "astro-icon": "^1.1.5",
+        "tailwindcss": "^4.1.4",
+        "tencentcloud-sdk-nodejs-cdn": "^4.1.24",
+        "typescript": "^5.8.3"
+    },
+    "devDependencies": {
+        "@iconify-json/fa-brands": "^1.2.1",
+        "@iconify-json/fa-regular": "^1.2.1",
+        "@iconify-json/fa-solid": "^1.2.1",
+        "@tailwindcss/typography": "^0.5.16",
+        "@types/sanitize-html": "^2.15.0",
+        "daisyui": "^5.0.28",
+        "sanitize-html": "^2.16.0",
+        "unist-util-visit": "^5.0.0"
+    }
+}

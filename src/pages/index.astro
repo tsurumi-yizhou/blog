@@ -1,0 +1,67 @@
+---
+import App from "../App.astro";
+import type {MarkdownInstance} from "astro";
+
+interface Frontmatter {
+    pubDate: string;
+    description: string;
+    cover?: string;
+    top?: boolean;
+}
+type Record = MarkdownInstance<Frontmatter>
+
+const data = import.meta.glob<Record>("./posts/*.md", {eager: true});
+const posts = Object.values(data);
+const featured = posts
+    .filter(post => post.frontmatter.top == true);
+const comparer = (a: Record, b: Record) => {
+    return new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime();
+}
+const latest = posts.sort(comparer).filter(post => !featured.includes(post)).slice(0, 10)
+---
+<App title="Home">
+    <div class="flex flex-col">
+        <div class="hero">
+            <div class="hero-content flex-col md:flex-row-reverse">
+                <img class="w-full h-72 object-cover object-center rounded-md shadow-2xl"
+                     src={featured[0].frontmatter.cover ?? "/img/about.jpg"} alt="cover"/>
+                <a href={featured[0].url}>
+                    <p class="py-4 text-xl font-bold">Featured</p>
+                    <h2 class="text-5xl font-serif hover:underline">{featured[0].url!!.split('/').pop()}</h2>
+                    <p class="py-6 text-xl font-serif">{featured[0].frontmatter.description}</p>
+                </a>
+            </div>
+        </div>
+        <div class="divider"/>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {featured.slice(1, 4).map(post => (
+                    <div class="flex flex-col">
+                        <img class="w-full h-48 object-cover object-center rounded-md shadow-md"
+                             src={post.frontmatter.cover ?? "/img/about.jpg"} alt="cover"/>
+                        <a class="pt-2" href={post.url}>
+                            <h2 class="text-2xl font-serif hover:underline">{post.url!!.split('/').pop()}</h2>
+                            <p class="pt-4 text-sm font-serif">{post.frontmatter.description}</p>
+                        </a>
+                    </div>
+            ))}
+        </div>
+        <div class="divider"/>
+        <div class="flex-col-reverse space-y-4">
+            {latest.map(post => (
+                    <div class="flex flex-col-reverse md:flex-row space-x-6">
+                        <time class="hidden sm:block pt-4 w-20 font-serif">{
+                            new Date(post.frontmatter.pubDate).toLocaleDateString("en-US")
+                        }</time>
+                        <a class="pt-2 w-full" href={post.url}>
+                            <h2 class="text-2xl font-serif hover:underline">{post.url!!.split('/').pop()}</h2>
+                            <p class="pt-4 text-sm font-serif">{post.frontmatter.description}</p>
+                        </a>
+                        <div class="w-full" />
+                        <img class="w-full h-48 object-cover object-center rounded-md shadow-md"
+                             src={post.frontmatter.cover ?? "/img/about.jpg"} alt="cover"/>
+                    </div>
+                    <div class="divider"/>
+            ))}
+        </div>
+    </div>
+</App>

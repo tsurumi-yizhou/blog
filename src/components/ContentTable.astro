@@ -1,0 +1,78 @@
+---
+import {MarkdownHeading} from "astro";
+
+interface Props {
+    headings: MarkdownHeading[]
+}
+
+const {headings} = Astro.props;
+---
+
+<ul class="block menu">
+    <li>
+        <h2 class="menu-title">On this page</h2>
+        <ul id="toc" class="menu">
+            {
+                headings.map((link) => (
+                        <li>
+                            <a href={`#${link.slug}`}>
+                                <h3 class:list={['ms-' + `${4 * link.depth - 4}`]} class="font-mono">{link.text}</h3>
+                            </a>
+                        </li>
+                ))
+            }
+        </ul>
+    </li>
+</ul>
+
+<script>
+    const titles =
+        Array.from(document.getElementById("slot")!.querySelectorAll("h1, h2, h3, h4, h5, h6")!)
+            .map((element) => ({
+            slug: element.innerHTML,
+            position: element.getBoundingClientRect().top + window.scrollY,
+            self: element,
+            }))
+
+        const entries =
+            Array.from(document.getElementById("toc")!.querySelectorAll("a")!)
+                .map((element) => ({
+                slug: element.getElementsByTagName("h3")[0].innerHTML,
+                self: element,
+                }))
+
+        const listener = () => {
+            const center = window.scrollY + window.innerHeight / 2;
+            let active = 0;
+            if (center <= titles[0].position) {
+                active = 0;
+                }
+            for (let i = 0; i < titles.length - 1; i ++) {
+                if (titles[i].position <= center && center <= titles[i + 1].position) {
+                    active = i;
+                    break;
+                    }
+                }
+            if (center >= titles[titles.length - 1].position) {
+                active = titles.length - 1;
+                }
+            entries.forEach((entry, index) => {
+                if (index == active) {
+                    entry.self.classList.add("menu-active");
+                    } else {
+                    entry.self.classList.remove("menu-active");
+                    }
+                })
+            }
+
+        window.onload = listener
+        window.addEventListener("scroll", listener)
+
+        entries.forEach((entry, index) => {
+            entry.self.addEventListener("click", (event) => {
+                event.preventDefault();
+                const offset = titles[index].position - window.innerHeight / 2 + titles[index].self.scrollHeight
+                window.scrollTo({ top: offset, behavior: "smooth" });
+                })
+            })
+</script>
