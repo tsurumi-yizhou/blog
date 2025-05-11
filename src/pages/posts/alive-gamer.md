@@ -1,6 +1,5 @@
 ---
 pubDate: 2023-12-10
-category: 文艺评论
 description:  《No Game No Life》，与其说游戏，不如说是赌博
 layout: ../../layouts/TitleArticle.astro
 ---

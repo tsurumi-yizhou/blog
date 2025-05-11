@@ -18,13 +18,17 @@ const comparer = (a: Record, b: Record) => {
     return new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime();
 }
 const latest = posts.sort(comparer).filter(post => !featured.includes(post)).slice(0, 10)
+
+function wrapImage(post: Record) {
+    return (post.frontmatter.cover ?? "/img/about.jpg") + "?imageView2/2/w/800/h/600/ignore-error/1"
+}
 ---
 <App title="Home">
     <div class="flex flex-col">
         <div class="hero">
             <div class="hero-content flex-col md:flex-row-reverse">
                 <img class="w-full h-72 object-cover object-center rounded-md shadow-2xl"
-                     src={featured[0].frontmatter.cover ?? "/img/about.jpg"} alt="cover"/>
+                     src={wrapImage(featured[0])} alt="cover"/>
                 <a href={featured[0].url}>
                     <p class="py-4 text-xl font-bold">Featured</p>
                     <h2 class="text-5xl font-serif hover:underline">{featured[0].url!!.split('/').pop()}</h2>
@@ -37,7 +41,7 @@ const latest = posts.sort(comparer).filter(post => !featured.includes(post)).sli
             {featured.slice(1, 4).map(post => (
                     <div class="flex flex-col">
                         <img class="w-full h-48 object-cover object-center rounded-md shadow-md"
-                             src={post.frontmatter.cover ?? "/img/about.jpg"} alt="cover"/>
+                             src={wrapImage(post)} alt="cover"/>
                         <a class="pt-2" href={post.url}>
                             <h2 class="text-2xl font-serif hover:underline">{post.url!!.split('/').pop()}</h2>
                             <p class="pt-4 text-sm font-serif">{post.frontmatter.description}</p>
@@ -58,7 +62,7 @@ const latest = posts.sort(comparer).filter(post => !featured.includes(post)).sli
                         </a>
                         <div class="w-full" />
                         <img class="w-full h-48 object-cover object-center rounded-md shadow-md"
-                             src={post.frontmatter.cover ?? "/img/about.jpg"} alt="cover"/>
+                             src={wrapImage(post)} alt="cover"/>
                     </div>
                     <div class="divider"/>
             ))}

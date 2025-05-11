@@ -1,6 +1,5 @@
 ---
 pubDate: 2023-07-19
-category: 古典学与神秘学
 description:  God’s in his heaven, All rights’ with the world.
 layout: ../../layouts/TitleArticle.astro
 ---
