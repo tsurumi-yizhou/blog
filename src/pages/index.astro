@@ -56,13 +56,14 @@ function wrapImage(post: Record) {
                         <time class="hidden sm:block pt-4 w-20 font-serif">{
                             new Date(post.frontmatter.pubDate).toLocaleDateString("en-US")
                         }</time>
-                        <a class="pt-2 w-full" href={post.url}>
-                            <h2 class="text-2xl font-serif hover:underline">{post.url!!.split('/').pop()}</h2>
-                            <p class="pt-4 text-sm font-serif">{post.frontmatter.description}</p>
-                        </a>
-                        <div class="w-full" />
-                        <img class="w-full h-48 object-cover object-center rounded-md shadow-md"
-                             src={wrapImage(post)} alt="cover"/>
+                        <div class="grid grid-cols-3 w-full space-x-6">
+                            <a class="col-span-2 pt-2 w-full" href={post.url}>
+                                <h2 class="text-2xl font-serif hover:underline">{post.url!!.split('/').pop()}</h2>
+                                <p class="pt-4 text-sm font-serif">{post.frontmatter.description}</p>
+                            </a>
+                            <img class="w-full h-48 object-cover object-center rounded-md shadow-md"
+                                 src={wrapImage(post)} alt="cover"/>
+                        </div>
                     </div>
                     <div class="divider"/>
             ))}
