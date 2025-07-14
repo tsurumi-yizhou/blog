@@ -6,19 +6,25 @@ interface Props {
     description: string;
 }
 
-const {name, link, cover, description} = Astro.props;
+const { name, link, cover, description } = Astro.props;
 ---
 
 <div
-        class="card card-compact transition-all duration-200 bg-base-200 hover:-translate-y-1"
+    class="card card-compact transition-all duration-200 bg-base-200 hover:-translate-y-1"
 >
     <a href={link}>
         <figure>
-            <img class="object-cover object-top rounded-lg w-full h-32 md:h-48" alt="avatar" src={cover}/>
+            <img
+                class="object-cover object-top rounded-lg w-full h-32 md:h-48"
+                alt="avatar"
+                src={cover}
+            />
         </figure>
         <div class="card-body">
             <h2 class="card-title font-serif">{name}</h2>
-            <p class="text-sm font-thin line-clamp-3 md:line-clamp-none">{description}</p>
+            <p class="text-sm font-thin line-clamp-3 md:line-clamp-none">
+                {description}
+            </p>
         </div>
     </a>
 </div>

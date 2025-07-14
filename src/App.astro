@@ -7,57 +7,55 @@ const { title } = Astro.props;
 ---
 
 <html lang="zh_cn">
-<head>
-    <meta charset="utf-8"/>
-    <title>{ title.charAt(0).toUpperCase() + title.slice(1) }</title>
-    <meta name="viewport" content="width=device-width"/>
-    <meta name="generator" content={Astro.generator}/>
-    <meta name="referrer" content="no-referrer"/>
-    <link rel="icon" type="image/x-icon" href="/img/favicon.png"/>
-    <script>
-        const theme = localStorage.getItem("theme");
-        const system = window.matchMedia("(prefers-color-scheme: light)").matches;
-        const body = document.getElementsByTagName("body")[0];
-        if ((theme == "system" && system) || theme == "light") {
-            body.setAttribute("theme", "light");
-            body.setAttribute("data-theme", "emerald");
-        }
-        if ((theme == "system" && !system) || theme == "dark") {
-            body.setAttribute("theme", "dark");
-            body.setAttribute("data-theme", "dim");
-        }
-        document.getElementById("light-theme")?.addEventListener("click", () => {
-            localStorage.setItem("theme", "light")
-        })
-        document.getElementById("dark-theme")?.addEventListener("click", () => {
-            localStorage.setItem("theme", "dark")
-        })
-        document.getElementById("system-theme")?.addEventListener("click", () => {
-            localStorage.setItem("theme", "system")
-        })
-    </script>
-</head>
-<body>
-<noscript>
-    <iframe class="hidden w-0 h-0" src="https://www.googletagmanager.com/ns.html?id=GTM-KVW782Q5"/>
-</noscript>
-<div class="min-h-screen flex flex-col">
-    <div class="sticky top-0 z-30 flex w-full justify-center bg-base-100 transition-shadow">
-        <TopBar/>
-    </div>
-    <div class="flex flex-grow justify-center my-10 mx-5">
-        <div class="mx-auto max-w-screen-lg">
-            <slot/>
+    <head>
+        <meta charset="utf-8" />
+        <title>{title.charAt(0).toUpperCase() + title.slice(1)}</title>
+        <meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+        <meta name="referrer" content="no-referrer" />
+        <link rel="icon" type="image/x-icon" href="/img/favicon.png" />
+        <script>
+            const theme = localStorage.getItem("theme");
+            const system = window.matchMedia(
+                "(prefers-color-scheme: light)",
+            ).matches;
+            const body = document.getElementsByTagName("body")[0];
+            if ((theme == "system" && system) || theme == "light") {
+                body.setAttribute("theme", "light");
+                body.setAttribute("data-theme", "emerald");
+            }
+            if ((theme == "system" && !system) || theme == "dark") {
+                body.setAttribute("theme", "dark");
+                body.setAttribute("data-theme", "dim");
+            }
+        </script>
+    </head>
+    <body>
+        <noscript>
+            <iframe
+                class="hidden w-0 h-0"
+                src="https://www.googletagmanager.com/ns.html?id=GTM-KVW782Q5"
+            ></iframe>
+        </noscript>
+        <div class="min-h-screen flex flex-col">
+            <div
+                class="sticky top-0 z-30 flex w-full justify-center bg-base-100 transition-shadow"
+            >
+                <TopBar />
+            </div>
+            <div class="flex flex-grow justify-center my-10 mx-5">
+                <div class="mx-auto max-w-screen-lg">
+                    <slot />
+                </div>
+            </div>
+
+            <BottomBar />
         </div>
-    </div>
+        <script>
+            import { Fancybox } from "@fancyapps/ui";
+            import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
-    <BottomBar />
-</div>
-<script>
-    import {Fancybox} from "@fancyapps/ui";
-    import "@fancyapps/ui/dist/fancybox/fancybox.css";
-
-    Fancybox.bind('[data-fancybox]', {});
-</script>
-</body>
+            Fancybox.bind("[data-fancybox]", {});
+        </script>
+    </body>
 </html>

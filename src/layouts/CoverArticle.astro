@@ -1,17 +1,18 @@
 ---
 import App from "../App.astro";
 
-const {url, frontmatter} = Astro.props;
+const { url, frontmatter } = Astro.props;
 const title = url.split("/").pop();
 const cover = frontmatter.cover!!;
 const description = frontmatter.description!!;
 ---
+
 <App title={title}>
     <article class="prose mx-auto prose-h3:font-serif">
-        <img class="rounded-lg shadow-lg mx-auton" src={cover} alt="about"/>
+        <img class="rounded-lg shadow-lg mx-auton" src={cover} alt="about" />
         <blockquote>
             <p>{description}</p>
         </blockquote>
-        <slot/>
+        <slot />
     </article>
 </App>

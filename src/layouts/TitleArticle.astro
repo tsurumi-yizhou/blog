@@ -1,31 +1,36 @@
 ---
 import ContentTable from "../components/ContentTable.astro";
 import PostTitle from "../components/PostTitle.astro";
-import {count} from "../utils/countWords";
+import { count } from "../utils/countWords";
 import App from "../App.astro";
 
-const {url, frontmatter, headings, rawContent} = Astro.props;
+const { url, frontmatter, headings, rawContent } = Astro.props;
 const title = url.split("/").pop();
-const words = count(rawContent())
+const words = count(rawContent());
 ---
+
 <App title={title}>
     <div class="flex justify-center">
-        <div class="hidden md:block relative order-2 flex-grow ps-4 lg:ps-24 max-w-32 w-full">
+        <div
+            class="hidden md:block relative order-2 flex-grow ps-4 lg:ps-24 max-w-32 w-full"
+        >
             {
                 headings.length != 0 && (
-                            <div class="fixed top-0 pt-32 overflow-x-hidden overflow-y-auto">
-                                <ContentTable headings={headings}/>
-                            </div>
+                    <div class="fixed top-0 pt-32 overflow-x-hidden overflow-y-auto">
+                        <ContentTable headings={headings} />
+                    </div>
                 )
             }
         </div>
 
         <article class="relative order-1 max-w-screen-md w-full">
-            <PostTitle title={title} frontmatter={frontmatter} words={words}/>
-            <div class="h-10"/>
-            <div id="slot"
-                 class="prose prose-img:rounded-md prose-img:shadow-md prose-img:mb-0 prose-img:pb-0 prose-img:w-full">
-                <slot/>
+            <PostTitle title={title} frontmatter={frontmatter} words={words} />
+            <div class="h-10"></div>
+            <div
+                id="slot"
+                class="prose prose-img:rounded-md prose-img:shadow-md prose-img:mb-0 prose-img:pb-0 prose-img:w-full"
+            >
+                <slot />
             </div>
         </article>
     </div>

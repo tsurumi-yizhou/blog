@@ -1,7 +1,7 @@
 import rss from "@astrojs/rss";
 import sanitizeHtml from "sanitize-html";
-import type {RSSFeedItem} from "@astrojs/rss";
-import type {MarkdownInstance} from "astro";
+import type { RSSFeedItem } from "@astrojs/rss";
+import type { MarkdownInstance } from "astro";
 
 interface Frontmatter {
     pubDate: string;
@@ -13,7 +13,7 @@ interface Frontmatter {
 type Record = MarkdownInstance<Frontmatter>
 
 export async function GET(context: any) {
-    const data = import.meta.glob<Record>("./posts/*.md", {eager: true});
+    const data = import.meta.glob<Record>("./posts/*.md", { eager: true });
     const posts = Object.values(data).sort((a, b) => {
         return new Date(b.frontmatter.pubDate).getTime() - new Date(a.frontmatter.pubDate).getTime();
     }).slice(0, 10).map(async post => ({

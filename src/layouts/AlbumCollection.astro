@@ -1,6 +1,6 @@
 ---
 import App from "../App.astro";
-import type {MarkdownHeading, MarkdownInstance} from "astro";
+import type { MarkdownHeading, MarkdownInstance } from "astro";
 
 interface Props {
     url: string;
@@ -17,45 +17,71 @@ interface Frontmatter {
     cover?: string;
     top?: boolean;
 }
-type Record = MarkdownInstance<Frontmatter>
+type Record = MarkdownInstance<Frontmatter>;
 
-const data = import.meta.glob<Record>("../pages/posts/*.md", {eager: true});
-const {url, frontmatter, headings} = Astro.props;
-const posts = Object.values(data).filter(post => {
-    for (const heading of headings) {
-        if (post.url?.includes(heading.text)) return true;
-    }
-    return false;
-}).sort((a, b) => {
-    return new Date(a.frontmatter.pubDate).getTime() - new Date(b.frontmatter.pubDate).getTime();
-});
-const cover = frontmatter.cover ?? posts[0].frontmatter.cover ?? "/img/about.jpg";
+const data = import.meta.glob<Record>("../pages/posts/*.md", { eager: true });
+const { url, frontmatter, headings } = Astro.props;
+const posts = Object.values(data)
+    .filter((post) => {
+        for (const heading of headings) {
+            if (post.url?.includes(heading.text)) return true;
+        }
+        return false;
+    })
+    .sort((a, b) => {
+        return (
+            new Date(a.frontmatter.pubDate).getTime() -
+            new Date(b.frontmatter.pubDate).getTime()
+        );
+    });
+const cover =
+    frontmatter.cover ?? posts[0].frontmatter.cover ?? "/img/about.jpg";
 ---
-<App title={url.split('/').pop()}>
+
+<App title={url.split("/").pop()}>
     <div class="flex flex-col md:grid md:grid-cols-3 gap-x-10">
         <section class="col-span-1">
-            <img class="w-64 h-64 mx-auto object-cover object-center rounded-md shadow-md"
-                 src={frontmatter.cover} alt="cover"/>
+            <img
+                class="w-64 h-64 mx-auto object-cover object-center rounded-md shadow-md"
+                src={frontmatter.cover}
+                alt="cover"
+            />
             <div class="mt-6 flex flex-col gap-y-4">
-                <h2 class="text-3xl font-bold mx-auto">{url.split('/').pop()}</h2>
-                <p class="text-sm font-thin mx-auto">{frontmatter.description}</p>
+                <h2 class="text-3xl font-bold mx-auto">
+                    {url.split("/").pop()}
+                </h2>
+                <p class="text-sm font-thin mx-auto">
+                    {frontmatter.description}
+                </p>
             </div>
         </section>
         <ul class="list md:col-span-2 md:h-[64vh] md:overflow-y-auto">
-            {posts.map(post => (
+            {
+                posts.map((post) => (
                     <a class="list-row" href={post.url}>
                         <div>
-                            <img class="size-20 rounded-md" src={post.frontmatter.cover} alt="cover"/>
+                            <img
+                                class="size-20 rounded-md"
+                                src={post.frontmatter.cover}
+                                alt="cover"
+                            />
                         </div>
                         <div>
-                            <h2 class="text-2xl font-serif">{post.url?.split('/').pop()}</h2>
-                            <p class="text-sm font-serif">{post.frontmatter.description}</p>
-                            <p class="text-sm font-thin">{
-                                new Date(post.frontmatter.pubDate).toLocaleDateString("en-US")
-                            }</p>
+                            <h2 class="text-2xl font-serif">
+                                {post.url?.split("/").pop()}
+                            </h2>
+                            <p class="text-sm font-serif">
+                                {post.frontmatter.description}
+                            </p>
+                            <p class="text-sm font-thin">
+                                {new Date(
+                                    post.frontmatter.pubDate,
+                                ).toLocaleDateString("en-US")}
+                            </p>
                         </div>
                     </a>
-            ))}
+                ))
+            }
         </ul>
     </div>
 </App>
