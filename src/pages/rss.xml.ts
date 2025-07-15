@@ -24,7 +24,7 @@ export async function GET(context: any) {
         content: sanitizeHtml(await post.compiledContent())
     }) satisfies RSSFeedItem)
     return rss({
-        title: "停云馆",
+        title: "空想赋格",
         description: "博学之，审问之，慎思之，明辨之，笃行之。\n" +
             "feedId:61724628704841735+userId:68480986032680960",
         site: context.site,

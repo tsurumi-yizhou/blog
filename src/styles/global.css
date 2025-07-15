@@ -1,5 +1,5 @@
 @import "tailwindcss";
 @plugin "daisyui" {
-    themes: emerald, winter, dim;
+    themes: emerald --default, dim --prefersdark;
 }
 @plugin "@tailwindcss/typography";

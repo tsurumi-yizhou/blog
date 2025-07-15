@@ -10,9 +10,10 @@ const pages = [
 
 <nav class="navbar w-full">
     <div class="flex items-center justify-between w-full">
-        <div class="block md:ml-16">
-            <a class="btn btn-ghost text-xl font-serif" href="/">停云馆</a>
+        <div class="block lg:ml-16">
+            <a class="btn btn-ghost text-xl font-serif" href="/">空想赋格</a>
         </div>
+
         <div class="hidden md:flex">
             {
                 pages.map((page) => (
@@ -25,49 +26,25 @@ const pages = [
                 ))
             }
         </div>
-        <div class="grid grid-cols-3">
-            <div class="md:hidden dropdown dropdown-end">
-                <button tabindex="0" role="button" class="btn btn-ghost">
-                    <Icon name="fa-solid:bars" size={16} />
-                </button>
-                <ul
-                    tabindex="0"
-                    class="dropdown-content menu shadow bg-base-100 rounded-box"
-                >
-                    {
-                        pages.map((page) => (
-                            <li>
-                                <a href={page.link}>{page.title}</a>
-                            </li>
-                        ))
-                    }
-                </ul>
-            </div>
-            <div class="dropdown dropdown-end">
-                <button tabindex="1" role="button" class="btn btn-ghost">
-                    <Icon name="fa-regular:sun" size={20} />
-                </button>
-                <ul
-                    tabindex="1"
-                    class="w-28 dropdown-content menu shadow bg-base-100 rounded-box"
-                >
-                    <li><a class="font-serif" id="light-theme" href="">Light</a></li>
-                    <li><a class="font-serif" id="dark-theme" href="">Dark</a></li>
-                    <li><a class="font-serif" id="system-theme" href="">System</a></li>
-                </ul>
-            </div>
+
+        <div class="hidden md:flex md:mr-32" />
+
+        <div class="md:hidden dropdown dropdown-end">
+            <button tabindex="0" role="button" class="btn btn-ghost">
+                <Icon name="fa-solid:bars" size={16} />
+            </button>
+            <ul
+                tabindex="0"
+                class="dropdown-content menu shadow bg-base-100 rounded-box"
+            >
+                {
+                    pages.map((page) => (
+                        <li>
+                            <a href={page.link}>{page.title}</a>
+                        </li>
+                    ))
+                }
+            </ul>
         </div>
     </div>
 </nav>
-
-<script>
-    document.getElementById("light-theme")?.addEventListener("click", () => {
-        localStorage.setItem("theme", "light");
-    });
-    document.getElementById("dark-theme")?.addEventListener("click", () => {
-        localStorage.setItem("theme", "dark");
-    });
-    document.getElementById("system-theme")?.addEventListener("click", () => {
-        localStorage.setItem("theme", "system");
-    });
-</script>

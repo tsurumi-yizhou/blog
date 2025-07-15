@@ -15,14 +15,14 @@
         "@astrojs/sitemap": "3.4.1",
         "@astrojs/webapi": "^3.0.0",
         "@fancyapps/ui": "^5.0.36",
-        "@netlify/functions": "^3.1.2",
+        "@netlify/functions": "^4.1.11",
         "@tailwindcss/vite": "^4.1.4",
         "@types/node": "^22.15.2",
         "astro": "5.11.0",
         "astro-expressive-code": "^0.40.2",
         "astro-icon": "^1.1.5",
         "tailwindcss": "^4.1.4",
-        "tencentcloud-sdk-nodejs-cdn": "^4.1.24",
+        "tencentcloud-sdk-nodejs-cdn": "^4.1.77",
         "typescript": "^5.8.3"
     },
     "devDependencies": {

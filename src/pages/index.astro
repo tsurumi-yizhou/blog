@@ -49,9 +49,9 @@ function wrapImage(post: Record) {
                     </div>
             ))}
         </div>
-        <div class="divider"/>
         <div class="flex-col-reverse space-y-4">
             {latest.map(post => (
+                    <div class="divider"/>
                     <div class="flex flex-col-reverse md:flex-row space-x-6">
                         <time class="hidden sm:block pt-4 w-20 font-serif">{
                             new Date(post.frontmatter.pubDate).toLocaleDateString("en-US")
@@ -65,7 +65,6 @@ function wrapImage(post: Record) {
                                  src={wrapImage(post)} alt="cover"/>
                         </div>
                     </div>
-                    <div class="divider"/>
             ))}
         </div>
     </div>

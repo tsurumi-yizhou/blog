@@ -2,7 +2,54 @@
 import App from "../App.astro";
 import CoverCard from "../components/CoverCard.astro";
 import PageHeader from "../components/PageHeader.astro";
-import { friends } from "../data/friends.json";
+
+interface Friend {
+    name: string;
+    link: string;
+    avatar: string;
+    description: string;
+}
+
+const friends: Friend[] = [
+    {
+        name: "Pil0tXia - 浮笙事记",
+        description: "不会摄影的白帽子不是好机长！",
+        link: "https://www.pil0txia.com",
+        avatar: "https://static.pil0txia.com/assets/03_3_600p.webp",
+    },
+    {
+        name: "拾月",
+        link: "https://www.skyue.com/",
+        description: "晚来天欲雪，能饮一杯无",
+        avatar: "https://www.skyue.com/favicon.ico",
+    },
+    {
+        name: "CONNECT THE WORLD.",
+        description:
+            "I am researching Large Language Models (LLMs) and Multi-Agent System (MAS).",
+        link: "https://teafrogsf.github.io/",
+        avatar: "https://teafrogsf.github.io/assets/img/prof_pic.jpg",
+    },
+    {
+        name: "TuboHsu",
+        description: "这是一只普通的Geek，应该不是一只猫。",
+        link: "https://owow.cc/",
+        avatar: "https://avatars.githubusercontent.com/u/47477044",
+    },
+    {
+        name: "ykiko",
+        description: "understand the trade-offs",
+        link: "https://ykiko.me",
+        avatar: "https://ykiko.me/img/author_hu12645359616066712621.jpg",
+    },
+    {
+        name: "caturra's Blog",
+        description:
+            "Blue Punis are the MOST dangerous monsters in the Atelier series!",
+        link: "https://www.bluepuni.com/",
+        avatar: "https://www.bluepuni.com/images/puni-600x600.png",
+    },
+];
 ---
 
 <App title="Friends">
