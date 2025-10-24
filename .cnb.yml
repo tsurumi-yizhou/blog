@@ -1,0 +1,10 @@
+main:
+  push:
+    - docker:
+        image: oven/bun:latest
+    
+      stages:
+        - name: build
+          script: bun install && bun build
+        
+        
