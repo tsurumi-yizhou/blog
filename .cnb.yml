@@ -5,6 +5,5 @@ main:
     
       stages:
         - name: build
-          script: bun install && bun build
-        
+          script: bun install && bun run build
         
